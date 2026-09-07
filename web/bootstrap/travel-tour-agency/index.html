@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<!--
+  Vespera — Travel tour agency website
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Vespera — Austin tour house with small-group destinations, packages, itineraries, booking, and traveler notes." />
+  <title>Vespera — Travel tours · Destinations &amp; itineraries</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="vs-body">
+  <a class="vs-skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="navbar navbar-expand-lg vs-navbar sticky-top" id="vsNavbar" aria-label="Primary">
+    <div class="container">
+      <a class="navbar-brand vs-brand" href="#home">
+        <span class="vs-brand-mark" aria-hidden="true"><i class="bi bi-compass-fill"></i></span>
+        <span>Vespera<em>.</em></span>
+      </a>
+      <button class="navbar-toggler vs-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#vsNav" aria-controls="vsNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="vsNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#house">House</a></li>
+          <li class="nav-item"><a class="nav-link" href="#destinations">Destinations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#packages">Packages</a></li>
+          <li class="nav-item"><a class="nav-link" href="#itineraries">Itineraries</a></li>
+          <li class="nav-item"><a class="nav-link" href="#guides">Guides</a></li>
+          <li class="nav-item"><a class="nav-link" href="#notes">Notes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#desk">Desk</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn vs-btn-primary btn-sm" href="#book"><i class="bi bi-suitcase2 me-1"></i>Hold a seat</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <header class="vs-hero" id="home">
+      <div class="container">
+        <div class="row align-items-end g-4">
+          <div class="col-lg-7">
+            <p class="vs-eyebrow">Austin · Small-group tours · Est. 2016</p>
+            <h1 class="vs-hero-title">Slow routes, short lists, and a seat that is actually held.</h1>
+            <p class="vs-hero-lead">
+              Vespera is Maya Poluru’s tour house — eight to twelve travelers, kitchens and trails that still have room, and a desk that answers the phone.
+            </p>
+            <ul class="vs-hero-points list-unstyled">
+              <li><i class="bi bi-geo-alt"></i> 612 Congress Avenue, Austin, TX</li>
+              <li><i class="bi bi-telephone"></i> (512) 555-0612</li>
+              <li><i class="bi bi-people"></i> Groups of 8–12 · Six departures a year</li>
+            </ul>
+          </div>
+          <div class="col-lg-5">
+            <aside class="vs-hero-stats" aria-label="House snapshot">
+              <div><strong>6</strong><span>Routes</span></div>
+              <div><strong>12</strong><span>Max group</span></div>
+              <div><strong>4.9</strong><span>Traveler rating</span></div>
+            </aside>
+          </div>
+        </div>
+
+        <form class="vs-search" id="vsSearchForm" aria-label="Find a tour">
+          <div class="vs-search-field">
+            <label for="vsSearchPlace">Destination</label>
+            <select class="form-select" id="vsSearchPlace">
+              <option value="all">Anywhere</option>
+              <option value="kyoto">Kyoto</option>
+              <option value="lisbon">Lisbon</option>
+              <option value="oaxaca">Oaxaca</option>
+              <option value="marrakech">Marrakech</option>
+              <option value="iceland">Iceland</option>
+              <option value="kerala">Kerala</option>
+            </select>
+          </div>
+          <div class="vs-search-field">
+            <label for="vsSearchMonth">Departure</label>
+            <select class="form-select" id="vsSearchMonth">
+              <option value="any">Any month</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+            </select>
+          </div>
+          <div class="vs-search-field">
+            <label for="vsSearchTravelers">Travelers</label>
+            <div class="vs-stepper">
+              <button type="button" class="vs-stepper-btn" id="vsSearchMinus" aria-label="Fewer travelers">−</button>
+              <input class="form-control text-center" id="vsSearchTravelers" name="travelers" type="number" min="1" max="12" value="2" required />
+              <button type="button" class="vs-stepper-btn" id="vsSearchPlus" aria-label="More travelers">+</button>
+            </div>
+          </div>
+          <div class="vs-search-field">
+            <label for="vsSearchType">Trip type</label>
+            <select class="form-select" id="vsSearchType">
+              <option value="all">Any type</option>
+              <option value="cultural">Cultural</option>
+              <option value="culinary">Culinary</option>
+              <option value="adventure">Adventure</option>
+              <option value="wellness">Wellness</option>
+            </select>
+          </div>
+          <button type="submit" class="btn vs-btn-primary vs-search-submit">
+            <i class="bi bi-search me-2"></i>Find a tour
+          </button>
+        </form>
+        <p class="vs-search-note" id="vsSearchNote" role="status" aria-live="polite"></p>
+      </div>
+    </header>
+
+    <section class="vs-section" id="house">
+      <div class="container">
+        <div class="row g-4 g-lg-5 align-items-start">
+          <div class="col-lg-5">
+            <p class="vs-eyebrow">The house</p>
+            <h2 class="vs-section-title">A tour company that still writes the days by hand.</h2>
+            <p class="vs-section-sub">Maya Poluru started Vespera after a decade of leading groups that were too large to sit at one table. The list is short on purpose.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="vs-prose">
+              <p>
+                We book inns, kitchens, and walking days — not bus lots. Kavya Poluru builds the culinary routes. Arjun Poluru takes the mountains. Anika Poluru holds the desk in Austin and the WhatsApp thread on the road.
+              </p>
+              <p>
+                Seats open nine months out. If you need a private departure, tell Anika Poluru when you write. She will say yes only if a guide is actually free.
+              </p>
+            </div>
+            <div class="row g-3 mt-1">
+              <div class="col-sm-4">
+                <div class="vs-chip-card">
+                  <i class="bi bi-people"></i>
+                  <div>
+                    <strong>Small groups</strong>
+                    <span>Eight to twelve seats</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="vs-chip-card">
+                  <i class="bi bi-house-heart"></i>
+                  <div>
+                    <strong>Inns, not towers</strong>
+                    <span>Walkable stays</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="vs-chip-card">
+                  <i class="bi bi-chat-heart"></i>
+                  <div>
+                    <strong>A real desk</strong>
+                    <span>Austin, weekdays 9–6</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3 g-lg-4 mt-4">
+          <div class="col-6 col-lg-3">
+            <article class="vs-metric">
+              <p class="vs-metric-value"><span class="vs-counter" data-target="6">0</span></p>
+              <p class="vs-metric-label">Active routes this year</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-3">
+            <article class="vs-metric">
+              <p class="vs-metric-value"><span class="vs-counter" data-target="10">0</span></p>
+              <p class="vs-metric-label">Years of Vespera</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-3">
+            <article class="vs-metric">
+              <p class="vs-metric-value"><span class="vs-counter" data-target="12">0</span></p>
+              <p class="vs-metric-label">Travelers on a full trip</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-3">
+            <article class="vs-metric">
+              <p class="vs-metric-value"><span class="vs-counter" data-decimals="1" data-target="4.9">0</span></p>
+              <p class="vs-metric-label">Notes from the road</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section vs-section-soft" id="destinations">
+      <div class="container">
+        <div class="vs-section-head">
+          <p class="vs-eyebrow">Destinations</p>
+          <h2 class="vs-section-title">Where we still go in person</h2>
+          <p class="vs-section-sub">Six places. Click one to filter the packages below.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-6 col-lg-4">
+            <button type="button" class="vs-place vs-place-kyoto" data-place-filter="kyoto">
+              <span class="vs-pill">Asia</span>
+              <strong>Kyoto</strong>
+              <span>Late light, tea houses, Maya Poluru</span>
+            </button>
+          </div>
+          <div class="col-6 col-lg-4">
+            <button type="button" class="vs-place vs-place-lisbon" data-place-filter="lisbon">
+              <span class="vs-pill">Europe</span>
+              <strong>Lisbon</strong>
+              <span>Alfama, Alentejo, Kavya Poluru</span>
+            </button>
+          </div>
+          <div class="col-6 col-lg-4">
+            <button type="button" class="vs-place vs-place-oaxaca" data-place-filter="oaxaca">
+              <span class="vs-pill">Americas</span>
+              <strong>Oaxaca</strong>
+              <span>Markets, moles, six kitchen days</span>
+            </button>
+          </div>
+          <div class="col-6 col-lg-4">
+            <button type="button" class="vs-place vs-place-marrakech" data-place-filter="marrakech">
+              <span class="vs-pill">Africa</span>
+              <strong>Marrakech</strong>
+              <span>Medina, Atlas, Arjun Poluru</span>
+            </button>
+          </div>
+          <div class="col-6 col-lg-4">
+            <button type="button" class="vs-place vs-place-iceland" data-place-filter="iceland">
+              <span class="vs-pill">Europe</span>
+              <strong>Iceland</strong>
+              <span>Ring road, small van, nine days</span>
+            </button>
+          </div>
+          <div class="col-6 col-lg-4">
+            <button type="button" class="vs-place vs-place-kerala" data-place-filter="kerala">
+              <span class="vs-pill">Asia</span>
+              <strong>Kerala</strong>
+              <span>Backwaters, ayurveda, slow boats</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section" id="packages">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+          <div class="vs-section-head mb-0">
+            <p class="vs-eyebrow">Packages</p>
+            <h2 class="vs-section-title">Trips on the board</h2>
+            <p class="vs-section-sub mb-0">Prices are per person, double occupancy, before airfare. Search above to filter by place or type.</p>
+          </div>
+          <div class="vs-filter-chips" role="group" aria-label="Filter packages">
+            <button type="button" class="vs-chip is-active" data-pkg-filter="all">All</button>
+            <button type="button" class="vs-chip" data-pkg-filter="cultural">Cultural</button>
+            <button type="button" class="vs-chip" data-pkg-filter="culinary">Culinary</button>
+            <button type="button" class="vs-chip" data-pkg-filter="adventure">Adventure</button>
+            <button type="button" class="vs-chip" data-pkg-filter="wellness">Wellness</button>
+          </div>
+        </div>
+        <div class="vs-pub-toolbar">
+          <div class="vs-search-wrap">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <input type="search" class="form-control" id="vsPkgSearch" placeholder="Search a city, guide, or kitchen…" aria-label="Search packages" />
+          </div>
+          <p class="vs-result-count mb-0" id="vsPkgCount">Showing 6 packages</p>
+        </div>
+
+        <div class="row g-3 g-lg-4" id="vsPkgGrid">
+          <div class="col-md-6 col-xl-4 vs-pkg-item" data-type="cultural" data-place="kyoto" data-region="asia" data-guests="10">
+            <article class="vs-pkg">
+              <div class="vs-pkg-visual vs-pkg-visual-a" aria-hidden="true"><i class="bi bi-brightness-alt-high"></i></div>
+              <div class="vs-pkg-body">
+                <div class="vs-pkg-meta">
+                  <span class="vs-pill">Cultural</span>
+                  <span class="vs-price">$4,280<span>/pp</span></span>
+                </div>
+                <h3>Kyoto in late light</h3>
+                <p>Tea houses, Fushimi at dusk, a kaiseki night Maya Poluru still books herself.</p>
+                <ul class="vs-pkg-facts">
+                  <li><i class="bi bi-calendar3"></i> 8 days</li>
+                  <li><i class="bi bi-people"></i> 10 travelers</li>
+                  <li><i class="bi bi-geo"></i> Japan</li>
+                </ul>
+                <div class="vs-pkg-actions">
+                  <button type="button" class="btn vs-btn-ghost vs-open-itinerary" data-itinerary="kyoto">Itinerary</button>
+                  <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Kyoto in late light">Hold a seat</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 vs-pkg-item" data-type="culinary" data-place="lisbon" data-region="europe" data-guests="10">
+            <article class="vs-pkg">
+              <div class="vs-pkg-visual vs-pkg-visual-b" aria-hidden="true"><i class="bi bi-cup-hot"></i></div>
+              <div class="vs-pkg-body">
+                <div class="vs-pkg-meta">
+                  <span class="vs-pill vs-pill-alt">Culinary</span>
+                  <span class="vs-price">$3,640<span>/pp</span></span>
+                </div>
+                <h3>Lisbon &amp; the Alentejo</h3>
+                <p>Alfama walks, Belém pastry, and Kavya Poluru’s wine days in Évora.</p>
+                <ul class="vs-pkg-facts">
+                  <li><i class="bi bi-calendar3"></i> 7 days</li>
+                  <li><i class="bi bi-people"></i> 10 travelers</li>
+                  <li><i class="bi bi-geo"></i> Portugal</li>
+                </ul>
+                <div class="vs-pkg-actions">
+                  <button type="button" class="btn vs-btn-ghost vs-open-itinerary" data-itinerary="lisbon">Itinerary</button>
+                  <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Lisbon &amp; the Alentejo">Hold a seat</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 vs-pkg-item" data-type="culinary" data-place="oaxaca" data-region="americas" data-guests="8">
+            <article class="vs-pkg">
+              <div class="vs-pkg-visual vs-pkg-visual-c" aria-hidden="true"><i class="bi bi-egg-fried"></i></div>
+              <div class="vs-pkg-body">
+                <div class="vs-pkg-meta">
+                  <span class="vs-pill vs-pill-alt">Culinary</span>
+                  <span class="vs-price">$2,980<span>/pp</span></span>
+                </div>
+                <h3>Oaxaca kitchens</h3>
+                <p>Markets at dawn, mole, mezcal, and a cooking day that is not a class for tourists.</p>
+                <ul class="vs-pkg-facts">
+                  <li><i class="bi bi-calendar3"></i> 6 days</li>
+                  <li><i class="bi bi-people"></i> 8 travelers</li>
+                  <li><i class="bi bi-geo"></i> Mexico</li>
+                </ul>
+                <div class="vs-pkg-actions vs-pkg-actions-single">
+                  <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Oaxaca kitchens">Hold a seat</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 vs-pkg-item" data-type="adventure" data-place="marrakech" data-region="africa" data-guests="10">
+            <article class="vs-pkg">
+              <div class="vs-pkg-visual vs-pkg-visual-d" aria-hidden="true"><i class="bi bi-mountain"></i></div>
+              <div class="vs-pkg-body">
+                <div class="vs-pkg-meta">
+                  <span class="vs-pill">Adventure</span>
+                  <span class="vs-price">$3,420<span>/pp</span></span>
+                </div>
+                <h3>Atlas &amp; Marrakech</h3>
+                <p>Medina mornings, a village night, and Arjun Poluru on the High Atlas trail.</p>
+                <ul class="vs-pkg-facts">
+                  <li><i class="bi bi-calendar3"></i> 8 days</li>
+                  <li><i class="bi bi-people"></i> 10 travelers</li>
+                  <li><i class="bi bi-geo"></i> Morocco</li>
+                </ul>
+                <div class="vs-pkg-actions">
+                  <button type="button" class="btn vs-btn-ghost vs-open-itinerary" data-itinerary="atlas">Itinerary</button>
+                  <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Atlas &amp; Marrakech">Hold a seat</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 vs-pkg-item" data-type="adventure" data-place="iceland" data-region="europe" data-guests="8">
+            <article class="vs-pkg">
+              <div class="vs-pkg-visual vs-pkg-visual-e" aria-hidden="true"><i class="bi bi-snow"></i></div>
+              <div class="vs-pkg-body">
+                <div class="vs-pkg-meta">
+                  <span class="vs-pill">Adventure</span>
+                  <span class="vs-price">$5,180<span>/pp</span></span>
+                </div>
+                <h3>Iceland ring, small van</h3>
+                <p>Nine days on the ring. Waterfalls, a quiet fjord, and a van that seats eight.</p>
+                <ul class="vs-pkg-facts">
+                  <li><i class="bi bi-calendar3"></i> 9 days</li>
+                  <li><i class="bi bi-people"></i> 8 travelers</li>
+                  <li><i class="bi bi-geo"></i> Iceland</li>
+                </ul>
+                <div class="vs-pkg-actions vs-pkg-actions-single">
+                  <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Iceland ring, small van">Hold a seat</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 vs-pkg-item" data-type="wellness" data-place="kerala" data-region="asia" data-guests="10">
+            <article class="vs-pkg">
+              <div class="vs-pkg-visual vs-pkg-visual-f" aria-hidden="true"><i class="bi bi-water"></i></div>
+              <div class="vs-pkg-body">
+                <div class="vs-pkg-meta">
+                  <span class="vs-pill vs-pill-alt">Wellness</span>
+                  <span class="vs-price">$3,190<span>/pp</span></span>
+                </div>
+                <h3>Kerala backwaters</h3>
+                <p>Houseboats, a quiet ashram day, and Maya Poluru’s slow south.</p>
+                <ul class="vs-pkg-facts">
+                  <li><i class="bi bi-calendar3"></i> 8 days</li>
+                  <li><i class="bi bi-people"></i> 10 travelers</li>
+                  <li><i class="bi bi-geo"></i> India</li>
+                </ul>
+                <div class="vs-pkg-actions vs-pkg-actions-single">
+                  <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Kerala backwaters">Hold a seat</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="vs-empty-state d-none" id="vsPkgEmpty">No packages match that search. Try another city or trip type.</p>
+      </div>
+    </section>
+
+    <section class="vs-section vs-section-soft" id="itineraries">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+          <div class="vs-section-head mb-0">
+            <p class="vs-eyebrow">Itineraries</p>
+            <h2 class="vs-section-title">How the days actually run</h2>
+            <p class="vs-section-sub mb-0">Three sample routes. Meals and inns are confirmed 60 days out.</p>
+          </div>
+          <div class="vs-filter-chips" role="tablist" aria-label="Choose an itinerary">
+            <button type="button" class="vs-chip is-active" data-itinerary-tab="kyoto" role="tab" aria-selected="true">Kyoto</button>
+            <button type="button" class="vs-chip" data-itinerary-tab="lisbon" role="tab" aria-selected="false">Lisbon</button>
+            <button type="button" class="vs-chip" data-itinerary-tab="atlas" role="tab" aria-selected="false">Atlas</button>
+          </div>
+        </div>
+
+        <div class="vs-itinerary is-active" id="vsItinKyoto" data-itinerary-panel="kyoto">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <p class="vs-label">8 days · Cultural</p>
+              <h3 class="vs-itin-title">Kyoto in late light</h3>
+              <p class="vs-section-sub">Maya Poluru. Gion inns, temple mornings, one free afternoon, kaiseki on night seven.</p>
+              <ul class="vs-itin-facts list-unstyled">
+                <li><i class="bi bi-person"></i> Guide: Maya Poluru</li>
+                <li><i class="bi bi-calendar3"></i> Next: 12 April · 4 October</li>
+                <li><i class="bi bi-currency-dollar"></i> $4,280 per person</li>
+              </ul>
+              <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Kyoto in late light">Hold this route</button>
+            </div>
+            <div class="col-lg-8">
+              <ol class="vs-days">
+                <li><span>01</span><div><strong>Gion, arrival tea</strong><p>Kansai airport transfer. Walk the lantern streets. Light supper at the inn.</p></div></li>
+                <li><span>02</span><div><strong>Fushimi at dusk</strong><p>Morning at a neighborhood shrine. Afternoon free. Torii gates after the crowds leave.</p></div></li>
+                <li><span>03</span><div><strong>Arashiyama</strong><p>Bamboo path early. River lunch. A quiet craft workshop Maya Poluru still attends.</p></div></li>
+                <li><span>04</span><div><strong>Nara day</strong><p>Train out, park walk, tofu lunch, back before evening.</p></div></li>
+                <li><span>05</span><div><strong>Tea houses</strong><p>A short ceremony, then a long conversation. Night in Gion.</p></div></li>
+                <li><span>06</span><div><strong>Open day</strong><p>Keep the inn, or take a day trip. Anika Poluru’s desk has the notes.</p></div></li>
+                <li><span>07</span><div><strong>Kaiseki</strong><p>Maya Poluru’s held table. Twelve seats. No substitutions speech — just tell us.</p></div></li>
+                <li><span>08</span><div><strong>Depart</strong><p>Breakfast, then transfers. Notes sent home the same week.</p></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-itinerary" id="vsItinLisbon" data-itinerary-panel="lisbon">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <p class="vs-label">7 days · Culinary</p>
+              <h3 class="vs-itin-title">Lisbon &amp; the Alentejo</h3>
+              <p class="vs-section-sub">Kavya Poluru. Hills, pastry, and two nights in Évora for the wine.</p>
+              <ul class="vs-itin-facts list-unstyled">
+                <li><i class="bi bi-person"></i> Guide: Kavya Poluru</li>
+                <li><i class="bi bi-calendar3"></i> Next: 9 May · 3 October</li>
+                <li><i class="bi bi-currency-dollar"></i> $3,640 per person</li>
+              </ul>
+              <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Lisbon &amp; the Alentejo">Hold this route</button>
+            </div>
+            <div class="col-lg-8">
+              <ol class="vs-days">
+                <li><span>01</span><div><strong>Alfama arrival</strong><p>River light, a tiled inn, and a walk that is not a hop-on bus.</p></div></li>
+                <li><span>02</span><div><strong>Belém &amp; the market</strong><p>Pastry before the line. Then Kavya Poluru’s market lunch.</p></div></li>
+                <li><span>03</span><div><strong>Sintra, short day</strong><p>One palace, a forest walk, back for a late table.</p></div></li>
+                <li><span>04</span><div><strong>Road to Évora</strong><p>Alentejo cork and a small hotel inside the walls.</p></div></li>
+                <li><span>05</span><div><strong>Wine day</strong><p>Two estates, one long lunch. No more than ten glasses among twelve people.</p></div></li>
+                <li><span>06</span><div><strong>Return to Lisbon</strong><p>Free afternoon. Fado only if you ask — we will not insist.</p></div></li>
+                <li><span>07</span><div><strong>Depart</strong><p>Airport transfers. Kavya Poluru sends the recipes you actually cooked.</p></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="vs-itinerary" id="vsItinAtlas" data-itinerary-panel="atlas">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <p class="vs-label">8 days · Adventure</p>
+              <h3 class="vs-itin-title">Atlas &amp; Marrakech</h3>
+              <p class="vs-section-sub">Arjun Poluru. Medina, a village night, and a trail that is a walk, not a summit contest.</p>
+              <ul class="vs-itin-facts list-unstyled">
+                <li><i class="bi bi-person"></i> Guide: Arjun Poluru</li>
+                <li><i class="bi bi-calendar3"></i> Next: 18 March · 8 November</li>
+                <li><i class="bi bi-currency-dollar"></i> $3,420 per person</li>
+              </ul>
+              <button type="button" class="btn vs-btn-primary vs-book-pkg" data-pkg="Atlas &amp; Marrakech">Hold this route</button>
+            </div>
+            <div class="col-lg-8">
+              <ol class="vs-days">
+                <li><span>01</span><div><strong>Riad, rest</strong><p>Airport to the medina. Courtyard supper. Early night.</p></div></li>
+                <li><span>02</span><div><strong>Medina with Arjun Poluru</strong><p>Souks with a purpose. Textiles, spice, a quiet lunch.</p></div></li>
+                <li><span>03</span><div><strong>Into the Atlas</strong><p>Drive, then a walking day to a village guesthouse.</p></div></li>
+                <li><span>04</span><div><strong>Village day</strong><p>Bread, terraces, and a pace that fits the group.</p></div></li>
+                <li><span>05</span><div><strong>High trail</strong><p>A longer walk. Packed lunch. Back before dusk.</p></div></li>
+                <li><span>06</span><div><strong>Return to Marrakech</strong><p>Hammam optional. Gardens in the late afternoon.</p></div></li>
+                <li><span>07</span><div><strong>Open morning</strong><p>Then a last courtyard supper. Notes for the road home.</p></div></li>
+                <li><span>08</span><div><strong>Depart</strong><p>Transfers. Arjun Poluru’s packing list goes out with the invoice.</p></div></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section" id="included">
+      <div class="container">
+        <div class="vs-section-head">
+          <p class="vs-eyebrow">On the trip</p>
+          <h2 class="vs-section-title">What the fare already covers</h2>
+          <p class="vs-section-sub">Inns, most meals, local guides, and the van. Airfare is yours.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-building" aria-hidden="true"></i>
+              <h3>Stays</h3>
+              <p>Walkable inns, riads, and one guesthouse night on adventure routes.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-egg-fried" aria-hidden="true"></i>
+              <h3>Most meals</h3>
+              <p>Breakfast daily, six dinners, and the kitchen days on culinary trips.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-signpost-2" aria-hidden="true"></i>
+              <h3>Local guides</h3>
+              <p>Maya, Kavya, or Arjun Poluru plus a city specialist on the ground.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-bus-front" aria-hidden="true"></i>
+              <h3>Transfers</h3>
+              <p>Airport runs and the van. No leftover seats sold to a second operator.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-ticket-perforated" aria-hidden="true"></i>
+              <h3>Entries</h3>
+              <p>Temples, palaces, and trail permits listed in the day sheets.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-headset" aria-hidden="true"></i>
+              <h3>Austin desk</h3>
+              <p>Anika Poluru before you fly and on WhatsApp while you are out.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-heart-pulse" aria-hidden="true"></i>
+              <h3>Pacing</h3>
+              <p>One open day on trips over a week. No luggage races.</p>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <article class="vs-amenity">
+              <i class="bi bi-airplane" aria-hidden="true"></i>
+              <h3>Not included</h3>
+              <p>International flights, travel insurance, and drinks beyond house wine.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section vs-section-soft" id="guides">
+      <div class="container">
+        <div class="vs-section-head">
+          <p class="vs-eyebrow">Guides</p>
+          <h2 class="vs-section-title">Who walks with you</h2>
+          <p class="vs-section-sub">Three Polurus on the road. One at the Austin desk.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-md-6 col-lg-3">
+            <article class="vs-guide">
+              <div class="vs-guide-avatar" aria-hidden="true">MP</div>
+              <p class="vs-label">Founder · Asia</p>
+              <h3>Maya Poluru</h3>
+              <p>Kyoto and Kerala. Fifteen years of small groups, from Hyderabad kitchens to Gion inns.</p>
+              <ul class="vs-guide-tags list-unstyled">
+                <li>Japan</li>
+                <li>India</li>
+                <li>Temples</li>
+              </ul>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="vs-guide">
+              <div class="vs-guide-avatar" aria-hidden="true">KP</div>
+              <p class="vs-label">Culinary</p>
+              <h3>Kavya Poluru</h3>
+              <p>Lisbon, Oaxaca, and the meals that are not a tasting menu in a hotel.</p>
+              <ul class="vs-guide-tags list-unstyled">
+                <li>Portugal</li>
+                <li>Mexico</li>
+                <li>Markets</li>
+              </ul>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="vs-guide">
+              <div class="vs-guide-avatar" aria-hidden="true">AP</div>
+              <p class="vs-label">Mountains</p>
+              <h3>Arjun Poluru</h3>
+              <p>Atlas trails and the Iceland ring. A van, a thermos, and a packing list that is honest.</p>
+              <ul class="vs-guide-tags list-unstyled">
+                <li>Morocco</li>
+                <li>Iceland</li>
+                <li>Walking</li>
+              </ul>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <article class="vs-guide">
+              <div class="vs-guide-avatar" aria-hidden="true">AN</div>
+              <p class="vs-label">The desk</p>
+              <h3>Anika Poluru</h3>
+              <p>Seats, insurance notes, and the late-night call if a flight moves. Austin weekdays.</p>
+              <ul class="vs-guide-tags list-unstyled">
+                <li>Bookings</li>
+                <li>Logistics</li>
+                <li>WhatsApp</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section" id="book">
+      <div class="container">
+        <div class="vs-book-panel">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-5">
+              <p class="vs-eyebrow vs-eyebrow-on-dark">Booking</p>
+              <h2 class="vs-contact-title">Hold a seat at Vespera</h2>
+              <p class="vs-contact-text">
+                Search a route above, then send the request. Anika Poluru confirms within one business day. A 20% deposit holds the place.
+              </p>
+              <ul class="vs-contact-facts list-unstyled mb-0">
+                <li><i class="bi bi-telephone"></i> (512) 555-0612</li>
+                <li><i class="bi bi-envelope"></i> <a href="mailto:mail.polurus@gmail.com">mail.polurus@gmail.com</a></li>
+                <li><i class="bi bi-clock"></i> Desk Mon–Fri 9–6 · Sat 10–2</li>
+              </ul>
+            </div>
+            <div class="col-lg-7">
+              <form class="vs-form" id="vsBookForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsName">Name</label>
+                    <input class="form-control" id="vsName" name="name" type="text" required autocomplete="name" placeholder="Maya Poluru" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsEmail">Email</label>
+                    <input class="form-control" id="vsEmail" name="email" type="email" required autocomplete="email" placeholder="you@email.com" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsPhone">Phone</label>
+                    <input class="form-control" id="vsPhone" name="phone" type="tel" required autocomplete="tel" placeholder="(512) 555-0100" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsTripPick">Package</label>
+                    <select class="form-select" id="vsTripPick" name="trip" required>
+                      <option value="">Choose a trip</option>
+                      <option>Kyoto in late light</option>
+                      <option>Lisbon &amp; the Alentejo</option>
+                      <option>Oaxaca kitchens</option>
+                      <option>Atlas &amp; Marrakech</option>
+                      <option>Iceland ring, small van</option>
+                      <option>Kerala backwaters</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsDepart">Departure month</label>
+                    <select class="form-select" id="vsDepart" name="depart" required>
+                      <option value="">Choose a month</option>
+                      <option>March</option>
+                      <option>April</option>
+                      <option>May</option>
+                      <option>September</option>
+                      <option>October</option>
+                      <option>November</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsBookTravelers">Travelers</label>
+                    <div class="vs-stepper">
+                      <button type="button" class="vs-stepper-btn" id="vsBookMinus" aria-label="Fewer travelers">−</button>
+                      <input class="form-control text-center" id="vsBookTravelers" name="travelers" type="number" min="1" max="12" value="2" required />
+                      <button type="button" class="vs-stepper-btn" id="vsBookPlus" aria-label="More travelers">+</button>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsRoom">Room</label>
+                    <select class="form-select" id="vsRoom" name="room">
+                      <option>Double occupancy</option>
+                      <option>Single supplement</option>
+                      <option>Share with a friend</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="vsOccasion">Occasion</label>
+                    <select class="form-select" id="vsOccasion" name="occasion">
+                      <option>Leisure</option>
+                      <option>Anniversary</option>
+                      <option>Family trip</option>
+                      <option>Solo traveler</option>
+                      <option>Just because</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="vsNotes">Notes for the desk</label>
+                    <textarea class="form-control" id="vsNotes" name="notes" rows="3" maxlength="400" placeholder="Diet, mobility, or a note for Anika Poluru."></textarea>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <button type="submit" class="btn vs-btn-primary flex-grow-1 btn-lg">
+                    <i class="bi bi-check2-circle me-2"></i>Request a seat
+                  </button>
+                  <button type="button" class="btn vs-btn-ghost btn-lg" id="vsSaveDraft">Save draft</button>
+                </div>
+                <p class="vs-form-note mb-0" id="vsFormNote" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section vs-section-soft" id="notes">
+      <div class="container">
+        <div class="vs-section-head">
+          <p class="vs-eyebrow">Traveler notes</p>
+          <h2 class="vs-section-title">What people write after they land</h2>
+          <p class="vs-section-sub">Stars are out of five. Names from recent departures.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-md-6 col-lg-4">
+            <article class="vs-review">
+              <div class="vs-stars" aria-label="5 out of 5">★★★★★</div>
+              <p>“Kyoto was quiet on purpose. Maya Poluru never hurried a shrine. The kaiseki night was the trip.”</p>
+              <strong>Priya Poluru</strong>
+              <span>Kyoto · April</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="vs-review">
+              <div class="vs-stars" aria-label="5 out of 5">★★★★★</div>
+              <p>“Kavya Poluru’s Évora lunch is why we booked Lisbon. Ten people, one table, no bus.”</p>
+              <strong>Rohan Poluru</strong>
+              <span>Lisbon · May</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="vs-review">
+              <div class="vs-stars" aria-label="4 out of 5">★★★★☆</div>
+              <p>“Atlas trail was a walk, not a contest. Arjun Poluru turned us around when the weather turned.”</p>
+              <strong>Ishaan Poluru</strong>
+              <span>Marrakech · March</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="vs-review">
+              <div class="vs-stars" aria-label="5 out of 5">★★★★★</div>
+              <p>“Oaxaca kitchens were actual kitchens. We cooked. We ate. We slept. Perfect.”</p>
+              <strong>Nikhil Poluru</strong>
+              <span>Oaxaca · November</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="vs-review">
+              <div class="vs-stars" aria-label="5 out of 5">★★★★★</div>
+              <p>“Anika Poluru fixed a missed connection at 11 pm Austin time. That is the desk.”</p>
+              <strong>Dev Poluru</strong>
+              <span>Iceland · September</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="vs-review">
+              <div class="vs-stars" aria-label="5 out of 5">★★★★★</div>
+              <p>“Kerala was slow in the best way. Houseboat, then a quiet ashram day. Maya Poluru knows the pace.”</p>
+              <strong>Anika Poluru</strong>
+              <span>Kerala · October</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section" id="desk">
+      <div class="container">
+        <div class="row g-4 g-lg-5">
+          <div class="col-lg-5">
+            <p class="vs-eyebrow">The desk</p>
+            <h2 class="vs-section-title">612 Congress Avenue</h2>
+            <p class="vs-section-sub">Downtown Austin. Walk-ins welcome on weekdays. Saturday is by appointment for trip briefings.</p>
+            <ul class="vs-hours list-unstyled">
+              <li data-days="1,2,3,4,5"><span>Monday – Friday</span><strong>9:00 am – 6:00 pm</strong></li>
+              <li data-days="6"><span>Saturday</span><strong>10:00 am – 2:00 pm</strong></li>
+              <li data-days="0"><span>Sunday</span><strong>Closed</strong></li>
+              <li><span>WhatsApp on trip</span><strong>24 hours</strong></li>
+            </ul>
+            <div class="vs-visit-actions">
+              <a class="btn vs-btn-primary" href="https://maps.google.com/?q=612+Congress+Avenue+Austin+TX" target="_blank" rel="noopener">Open map</a>
+              <a class="btn vs-btn-ghost" href="tel:+15125550612">Call the desk</a>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="vs-map" role="img" aria-label="Map placeholder for 612 Congress Avenue, Austin">
+              <div>
+                <p class="vs-label">Vespera</p>
+                <strong>612 Congress Avenue</strong>
+                <p>Austin, TX 78701</p>
+                <p class="mb-0">Suite 200 · Ring Anika Poluru on arrival</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vs-section vs-section-soft" id="faq">
+      <div class="container">
+        <div class="vs-section-head text-center mx-auto">
+          <p class="vs-eyebrow">FAQ</p>
+          <h2 class="vs-section-title">Before you pack</h2>
+          <p class="vs-section-sub">Short answers from Anika Poluru’s desk.</p>
+        </div>
+        <div class="accordion vs-accordion mx-auto" id="vsFaq">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#vsFaq1" aria-expanded="true" aria-controls="vsFaq1">How large are the groups?</button>
+            </h3>
+            <div id="vsFaq1" class="accordion-collapse collapse show" data-bs-parent="#vsFaq">
+              <div class="accordion-body">Eight to twelve travelers. We do not add a thirteenth seat, even if a friend asks late.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vsFaq2" aria-expanded="false" aria-controls="vsFaq2">Is airfare included?</button>
+            </h3>
+            <div id="vsFaq2" class="accordion-collapse collapse" data-bs-parent="#vsFaq">
+              <div class="accordion-body">No. Anika Poluru will send suggested flights after you hold a seat. Arrive the afternoon of day one.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vsFaq3" aria-expanded="false" aria-controls="vsFaq3">What is the cancellation window?</button>
+            </h3>
+            <div id="vsFaq3" class="accordion-collapse collapse" data-bs-parent="#vsFaq">
+              <div class="accordion-body">Deposit is refundable 90 days out. After that, we can transfer the seat to another departure the same year if one is open.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#vsFaq4" aria-expanded="false" aria-controls="vsFaq4">Can I travel solo?</button>
+            </h3>
+            <div id="vsFaq4" class="accordion-collapse collapse" data-bs-parent="#vsFaq">
+              <div class="accordion-body">Yes. Choose single supplement or ask Anika Poluru to pair you with another solo traveler of the same gender when possible.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="vs-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="vs-brand vs-brand-footer" href="#home">
+            <span class="vs-brand-mark" aria-hidden="true"><i class="bi bi-compass-fill"></i></span>
+            <span>Vespera<em>.</em></span>
+          </a>
+          <p class="vs-footer-text">Small-group tours from an Austin desk. Maya, Kavya, Arjun, and Anika Poluru.</p>
+          <form class="vs-news" id="vsNewsForm">
+            <label class="visually-hidden" for="vsNewsEmail">Email for departure notes</label>
+            <input class="form-control" id="vsNewsEmail" type="email" required placeholder="Departure-list email" />
+            <button type="submit" class="btn vs-btn-secondary">Join</button>
+          </form>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <p class="vs-footer-heading">Travel</p>
+          <ul class="vs-footer-links list-unstyled">
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#itineraries">Itineraries</a></li>
+            <li><a href="#book">Hold a seat</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <p class="vs-footer-heading">House</p>
+          <ul class="vs-footer-links list-unstyled">
+            <li><a href="#house">Story</a></li>
+            <li><a href="#guides">Guides</a></li>
+            <li><a href="#notes">Notes</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <p class="vs-footer-heading">Contact</p>
+          <p class="vs-footer-text mb-2">
+            612 Congress Avenue, Austin, TX 78701<br />
+            <a href="tel:+15125550612">(512) 555-0612</a><br />
+            <a href="mailto:mail.polurus@gmail.com">mail.polurus@gmail.com</a>
+          </p>
+          <div class="vs-social">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://polurus.com" target="_blank" rel="noopener" aria-label="Poluru Labs"><i class="bi bi-globe"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="vs-footer-bottom">
+        <span>&copy; 2026 Subrahmanyam Poluru · Vespera. Free for personal &amp; commercial use.</span>
+        <span>Brand #612D53 · Bootstrap 5</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="vsToast" class="toast vs-toast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <strong class="me-auto" id="vsToastTitle">Done</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="vsToastBody">Action completed.</div>
+    </div>
+  </div>
+
+  <button type="button" class="vs-back-top" id="vsBackTop" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

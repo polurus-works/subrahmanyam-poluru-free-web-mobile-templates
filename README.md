@@ -69,6 +69,11 @@ Location: [web/bootstrap/real-estate-platform](web/bootstrap/real-estate-platfor
 
 Austin property marketplace with search filters, listing cards, agent profiles, and inquiry forms. Brand color: `#44ACFF`. CSS prefix: `ll-*`.
 
+### 14. Travel Tour Agency (Vespera)
+Location: [web/bootstrap/travel-tour-agency](web/bootstrap/travel-tour-agency)
+
+Small-group tour discovery site with destinations, packages, itineraries, booking, and traveler notes. Brand color: `#612D53`. CSS prefix: `vs-*`.
+
 ## Repository Structure
 
 ```text
@@ -86,7 +91,8 @@ web/bootstrap/
 ├── startup-kpi-board/
 ├── restaurant-reservation/
 ├── hotel-booking/
-└── real-estate-platform/
+├── real-estate-platform/
+└── travel-tour-agency/
 ```
 
 Each template folder includes HTML, assets, and its own README.

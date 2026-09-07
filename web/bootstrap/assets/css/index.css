@@ -280,6 +280,7 @@ body {
 .table-tag.academic { background: #f2f1ff; color: #4d48b0; }
 .table-tag.healthcare { background: #eafaf5; color: #13775d; }
 .table-tag.hospitality { background: #e7f0ed; color: #3d5e56; }
+.table-tag.travel { background: #f3e8ee; color: #612d53; }
 
 .demo-link {
   display: inline-flex;
