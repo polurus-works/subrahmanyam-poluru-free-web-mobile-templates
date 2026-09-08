@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<!--
+  Helio — Online course platform
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Helio — Austin online school with a course catalog, instructor profiles, learning paths, and studio pricing." />
+  <title>Helio — Online courses · Paths &amp; instructors</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="hl-body">
+  <a class="hl-skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="navbar navbar-expand-lg hl-navbar sticky-top" id="hlNavbar" aria-label="Primary">
+    <div class="container">
+      <a class="navbar-brand hl-brand" href="#home">
+        <span class="hl-brand-mark" aria-hidden="true"><i class="bi bi-brightness-high-fill"></i></span>
+        <span>Helio<em>.</em></span>
+      </a>
+      <button class="navbar-toggler hl-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#hlNav" aria-controls="hlNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="hlNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#school">School</a></li>
+          <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#paths">Paths</a></li>
+          <li class="nav-item"><a class="nav-link" href="#instructors">Instructors</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#notes">Notes</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn hl-btn-primary btn-sm" href="#enroll"><i class="bi bi-mortarboard me-1"></i>Enroll</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <header class="hl-hero" id="home">
+      <div class="container">
+        <div class="row align-items-end g-4">
+          <div class="col-lg-7">
+            <p class="hl-eyebrow hl-eyebrow-on-dark">Austin · Live cohorts · Est. 2019</p>
+            <h1 class="hl-hero-title">A school for people who still have to ship on Monday.</h1>
+            <p class="hl-hero-lead">
+              Helio is Subbu Poluru’s online campus — product, design, data, and leadership courses taught by instructors who keep a day job. No filler modules. Office hours on Thursdays.
+            </p>
+            <ul class="hl-hero-points list-unstyled">
+              <li><i class="bi bi-geo-alt"></i> 418 Congress Avenue, Austin, TX</li>
+              <li><i class="bi bi-telephone"></i> (512) 555-0418</li>
+              <li><i class="bi bi-camera-video"></i> Live cohorts + recorded studios</li>
+            </ul>
+          </div>
+          <div class="col-lg-5">
+            <aside class="hl-hero-stats" aria-label="Campus snapshot">
+              <div><strong>18</strong><span>Active courses</span></div>
+              <div><strong>4</strong><span>Learning paths</span></div>
+              <div><strong>4.9</strong><span>Learner rating</span></div>
+            </aside>
+          </div>
+        </div>
+
+        <form class="hl-search" id="hlSearchForm" aria-label="Find a course">
+          <div class="hl-search-field hl-search-grow">
+            <label for="hlSearchQuery">Topic</label>
+            <input class="form-control" id="hlSearchQuery" type="search" placeholder="Product, SQL, brand systems…" />
+          </div>
+          <div class="hl-search-field">
+            <label for="hlSearchTopic">Catalog</label>
+            <select class="form-select" id="hlSearchTopic">
+              <option value="all">All subjects</option>
+              <option value="product">Product</option>
+              <option value="design">Design</option>
+              <option value="data">Data</option>
+              <option value="engineering">Engineering</option>
+              <option value="leadership">Leadership</option>
+              <option value="growth">Growth</option>
+            </select>
+          </div>
+          <div class="hl-search-field">
+            <label for="hlSearchLevel">Level</label>
+            <select class="form-select" id="hlSearchLevel">
+              <option value="all">Any level</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div class="hl-search-field">
+            <label for="hlSearchLength">Length</label>
+            <select class="form-select" id="hlSearchLength">
+              <option value="all">Any length</option>
+              <option value="short">4–6 weeks</option>
+              <option value="mid">7–8 weeks</option>
+              <option value="long">10–12 weeks</option>
+            </select>
+          </div>
+          <button type="submit" class="btn hl-btn-primary hl-search-submit">
+            <i class="bi bi-search me-2"></i>Find a course
+          </button>
+        </form>
+        <p class="hl-search-note" id="hlSearchNote" role="status" aria-live="polite"></p>
+      </div>
+    </header>
+
+    <section class="hl-section" id="school">
+      <div class="container">
+        <div class="row g-4 g-lg-5 align-items-start">
+          <div class="col-lg-5">
+            <p class="hl-eyebrow">The school</p>
+            <h2 class="hl-section-title">Fewer courses. Actual critique. A desk that answers.</h2>
+            <p class="hl-section-sub">Subbu Poluru started Helio after a decade of watching teams buy libraries they never finished. The catalog stays short on purpose.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="hl-prose">
+              <p>
+                Maya Poluru runs product studios. Kavya Poluru teaches interface craft. Arjun Poluru holds the data track. Anika Poluru keeps the campus calendar and the Thursday office-hour thread.
+              </p>
+              <p>
+                Cohorts open six times a year. If you need a private path for a team, write Anika Poluru. She will say yes only if an instructor is actually free.
+              </p>
+            </div>
+            <div class="row g-3 mt-1">
+              <div class="col-sm-4">
+                <div class="hl-chip-card">
+                  <i class="bi bi-people"></i>
+                  <div>
+                    <strong>Small studios</strong>
+                    <span>Eighteen to twenty-four seats</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="hl-chip-card">
+                  <i class="bi bi-chat-square-text"></i>
+                  <div>
+                    <strong>Live critique</strong>
+                    <span>Weekly, not a forum dump</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="hl-chip-card">
+                  <i class="bi bi-clock-history"></i>
+                  <div>
+                    <strong>A real desk</strong>
+                    <span>Austin, weekdays 9–6</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3 g-lg-4 mt-4">
+          <div class="col-6 col-lg-3">
+            <article class="hl-metric">
+              <p class="hl-metric-value"><span class="hl-counter" data-target="18">0</span></p>
+              <p class="hl-metric-label">Courses on the board</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-3">
+            <article class="hl-metric">
+              <p class="hl-metric-value"><span class="hl-counter" data-target="7">0</span></p>
+              <p class="hl-metric-label">Years of Helio</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-3">
+            <article class="hl-metric">
+              <p class="hl-metric-value"><span class="hl-counter" data-target="24">0</span></p>
+              <p class="hl-metric-label">Seats in a full studio</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-3">
+            <article class="hl-metric">
+              <p class="hl-metric-value"><span class="hl-counter" data-decimals="1" data-target="4.9">0</span></p>
+              <p class="hl-metric-label">Notes from alumni</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section hl-section-soft" id="courses">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+          <div class="hl-section-head mb-0">
+            <p class="hl-eyebrow">Catalog</p>
+            <h2 class="hl-section-title">Courses you can finish</h2>
+            <p class="hl-section-sub">Nine studios this term. Filter by subject, then enroll with Anika Poluru.</p>
+          </div>
+          <div class="hl-filter-chips" role="group" aria-label="Filter courses">
+            <button type="button" class="hl-chip is-active" data-course-filter="all">All</button>
+            <button type="button" class="hl-chip" data-course-filter="product">Product</button>
+            <button type="button" class="hl-chip" data-course-filter="design">Design</button>
+            <button type="button" class="hl-chip" data-course-filter="data">Data</button>
+            <button type="button" class="hl-chip" data-course-filter="engineering">Engineering</button>
+            <button type="button" class="hl-chip" data-course-filter="leadership">Leadership</button>
+            <button type="button" class="hl-chip" data-course-filter="growth">Growth</button>
+          </div>
+        </div>
+        <p class="hl-result-count" id="hlCourseCount">Showing 9 courses</p>
+        <div class="row g-3 g-lg-4" id="hlCourseGrid">
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="product" data-level="intermediate" data-length="mid" data-name="Product Sense Studio">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-a" aria-hidden="true"><i class="bi bi-lightbulb"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Product</span>
+                  <p class="hl-price">$249 <span>· 8 weeks</span></p>
+                </div>
+                <h3>Product Sense Studio</h3>
+                <p>Write a problem, pick a bet, and defend it in critique with Maya Poluru.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Intermediate</li>
+                  <li><i class="bi bi-camera-video"></i>Live + studio</li>
+                  <li><i class="bi bi-people"></i>22 seats</li>
+                </ul>
+                <p class="hl-meta">Maya Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Product Sense Studio">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="design" data-level="intermediate" data-length="short" data-name="Interface Craft">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-b" aria-hidden="true"><i class="bi bi-vector-pen"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Design</span>
+                  <p class="hl-price">$199 <span>· 6 weeks</span></p>
+                </div>
+                <h3>Interface Craft</h3>
+                <p>Type, spacing, and a system you can hand to engineering. Kavya Poluru reviews every file.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Intermediate</li>
+                  <li><i class="bi bi-laptop"></i>Figma studio</li>
+                  <li><i class="bi bi-people"></i>18 seats</li>
+                </ul>
+                <p class="hl-meta">Kavya Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Interface Craft">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="data" data-level="advanced" data-length="long" data-name="Decision Systems">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-c" aria-hidden="true"><i class="bi bi-graph-up-arrow"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Data</span>
+                  <p class="hl-price">$279 <span>· 10 weeks</span></p>
+                </div>
+                <h3>Decision Systems</h3>
+                <p>Metrics that change a meeting. Arjun Poluru’s warehouse-to-slide path.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Advanced</li>
+                  <li><i class="bi bi-database"></i>SQL + notebooks</li>
+                  <li><i class="bi bi-people"></i>20 seats</li>
+                </ul>
+                <p class="hl-meta">Arjun Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Decision Systems">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="leadership" data-level="advanced" data-length="short" data-name="Shipping Leadership">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-d" aria-hidden="true"><i class="bi bi-flag"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill hl-pill-alt">Leadership</span>
+                  <p class="hl-price">$189 <span>· 5 weeks</span></p>
+                </div>
+                <h3>Shipping Leadership</h3>
+                <p>Subbu Poluru on calendars, staff meetings, and saying no without a slide.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Advanced</li>
+                  <li><i class="bi bi-chat-dots"></i>Case studios</li>
+                  <li><i class="bi bi-people"></i>16 seats</li>
+                </ul>
+                <p class="hl-meta">Subbu Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Shipping Leadership">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="growth" data-level="intermediate" data-length="mid" data-name="Growth Experiments">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-e" aria-hidden="true"><i class="bi bi-rocket-takeoff"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Growth</span>
+                  <p class="hl-price">$229 <span>· 7 weeks</span></p>
+                </div>
+                <h3>Growth Experiments</h3>
+                <p>Priya Poluru’s experiment board — one honest test a week, not a dashboard of hope.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Intermediate</li>
+                  <li><i class="bi bi-clipboard-data"></i>Live board</li>
+                  <li><i class="bi bi-people"></i>24 seats</li>
+                </ul>
+                <p class="hl-meta">Priya Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Growth Experiments">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="engineering" data-level="beginner" data-length="long" data-name="Frontend Foundations">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-f" aria-hidden="true"><i class="bi bi-code-slash"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Engineering</span>
+                  <p class="hl-price">$299 <span>· 12 weeks</span></p>
+                </div>
+                <h3>Frontend Foundations</h3>
+                <p>HTML, CSS, and enough JavaScript to ship a page. Nikhil Poluru pairs on Fridays.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Beginner</li>
+                  <li><i class="bi bi-terminal"></i>Build labs</li>
+                  <li><i class="bi bi-people"></i>24 seats</li>
+                </ul>
+                <p class="hl-meta">Nikhil Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Frontend Foundations">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="design" data-level="beginner" data-length="short" data-name="Brand Systems">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-g" aria-hidden="true"><i class="bi bi-palette"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Design</span>
+                  <p class="hl-price">$169 <span>· 5 weeks</span></p>
+                </div>
+                <h3>Brand Systems</h3>
+                <p>Color, type, and a one-page kit Ishaan Poluru will not let you over-decorate.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Beginner</li>
+                  <li><i class="bi bi-grid"></i>Kit studio</li>
+                  <li><i class="bi bi-people"></i>20 seats</li>
+                </ul>
+                <p class="hl-meta">Ishaan Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Brand Systems">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="data" data-level="beginner" data-length="short" data-name="SQL for Operators">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-h" aria-hidden="true"><i class="bi bi-table"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Data</span>
+                  <p class="hl-price">$149 <span>· 4 weeks</span></p>
+                </div>
+                <h3>SQL for Operators</h3>
+                <p>Rohan Poluru’s four-week query lab for PMs and ops leads who are tired of waiting.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Beginner</li>
+                  <li><i class="bi bi-hdd-stack"></i>Query labs</li>
+                  <li><i class="bi bi-people"></i>24 seats</li>
+                </ul>
+                <p class="hl-meta">Rohan Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="SQL for Operators">Enroll</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4 hl-course-item" data-topic="design" data-level="intermediate" data-length="short" data-name="Research in Practice">
+            <article class="hl-course">
+              <div class="hl-course-visual hl-course-visual-b" aria-hidden="true"><i class="bi bi-search"></i></div>
+              <div class="hl-course-body">
+                <div class="hl-course-meta">
+                  <span class="hl-pill">Design</span>
+                  <p class="hl-price">$179 <span>· 5 weeks</span></p>
+                </div>
+                <h3>Research in Practice</h3>
+                <p>Interviews, synthesis, and a readout Anika Poluru will not let you over-decorate with quotes.</p>
+                <ul class="hl-course-facts">
+                  <li><i class="bi bi-bar-chart"></i>Intermediate</li>
+                  <li><i class="bi bi-journal-text"></i>Field notes</li>
+                  <li><i class="bi bi-people"></i>18 seats</li>
+                </ul>
+                <p class="hl-meta">Anika Poluru</p>
+                <button type="button" class="btn hl-btn-primary w-100 hl-enroll-course" data-course="Research in Practice">Enroll</button>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="hl-empty-state d-none" id="hlCourseEmpty">No studios match that filter. Try another subject or length.</p>
+      </div>
+    </section>
+
+    <section class="hl-section" id="paths">
+      <div class="container">
+        <div class="hl-section-head">
+          <p class="hl-eyebrow">Learning paths</p>
+          <h2 class="hl-section-title">A sequence, not a pile of modules</h2>
+          <p class="hl-section-sub">Four stacked tracks. Finish one studio, then the next. Anika Poluru holds the calendar.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-lg-6">
+            <article class="hl-path">
+              <div class="hl-path-top">
+                <span class="hl-pill">Product</span>
+                <p class="hl-price">$667 <span>· 20 weeks</span></p>
+              </div>
+              <h3>Product Builder</h3>
+              <p>Sense, experiments, then the staff meeting. Built for PMs who still write tickets.</p>
+              <ol class="hl-path-steps">
+                <li><span>01</span><div><strong>Product Sense Studio</strong><em>Maya Poluru · 8 weeks</em></div></li>
+                <li><span>02</span><div><strong>Growth Experiments</strong><em>Priya Poluru · 7 weeks</em></div></li>
+                <li><span>03</span><div><strong>Shipping Leadership</strong><em>Subbu Poluru · 5 weeks</em></div></li>
+              </ol>
+              <button type="button" class="btn hl-btn-ghost w-100 hl-enroll-path" data-path="Product Builder" data-course="Product Sense Studio">Start this path</button>
+            </article>
+          </div>
+          <div class="col-lg-6">
+            <article class="hl-path">
+              <div class="hl-path-top">
+                <span class="hl-pill">Design</span>
+                <p class="hl-price">$547 <span>· 16 weeks</span></p>
+              </div>
+              <h3>Design Lead</h3>
+              <p>Craft, brand, then research that survives a stakeholder review.</p>
+              <ol class="hl-path-steps">
+                <li><span>01</span><div><strong>Interface Craft</strong><em>Kavya Poluru · 6 weeks</em></div></li>
+                <li><span>02</span><div><strong>Brand Systems</strong><em>Ishaan Poluru · 5 weeks</em></div></li>
+                <li><span>03</span><div><strong>Research in Practice</strong><em>Anika Poluru · 5 weeks</em></div></li>
+              </ol>
+              <button type="button" class="btn hl-btn-ghost w-100 hl-enroll-path" data-path="Design Lead" data-course="Interface Craft">Start this path</button>
+            </article>
+          </div>
+          <div class="col-lg-6">
+            <article class="hl-path">
+              <div class="hl-path-top">
+                <span class="hl-pill">Data</span>
+                <p class="hl-price">$428 <span>· 14 weeks</span></p>
+              </div>
+              <h3>Data Operator</h3>
+              <p>Queries first. Then the system that decides what the company looks at.</p>
+              <ol class="hl-path-steps">
+                <li><span>01</span><div><strong>SQL for Operators</strong><em>Rohan Poluru · 4 weeks</em></div></li>
+                <li><span>02</span><div><strong>Decision Systems</strong><em>Arjun Poluru · 10 weeks</em></div></li>
+              </ol>
+              <button type="button" class="btn hl-btn-ghost w-100 hl-enroll-path" data-path="Data Operator" data-course="SQL for Operators">Start this path</button>
+            </article>
+          </div>
+          <div class="col-lg-6">
+            <article class="hl-path">
+              <div class="hl-path-top">
+                <span class="hl-pill hl-pill-alt">Founder</span>
+                <p class="hl-price">$667 <span>· 20 weeks</span></p>
+              </div>
+              <h3>Founder Track</h3>
+              <p>Subbu Poluru’s stack for people who still do the work and run the room.</p>
+              <ol class="hl-path-steps">
+                <li><span>01</span><div><strong>Product Sense Studio</strong><em>Maya Poluru · 8 weeks</em></div></li>
+                <li><span>02</span><div><strong>Shipping Leadership</strong><em>Subbu Poluru · 5 weeks</em></div></li>
+                <li><span>03</span><div><strong>Growth Experiments</strong><em>Priya Poluru · 7 weeks</em></div></li>
+              </ol>
+              <button type="button" class="btn hl-btn-ghost w-100 hl-enroll-path" data-path="Founder Track" data-course="Product Sense Studio">Start this path</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section hl-section-soft" id="instructors">
+      <div class="container">
+        <div class="hl-section-head">
+          <p class="hl-eyebrow">Faculty</p>
+          <h2 class="hl-section-title">Instructors who still do the work</h2>
+          <p class="hl-section-sub">Eight Polurus. One campus desk. Message any of them into the enroll form.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">SP</div>
+              <p class="hl-label">Founder · Leadership</p>
+              <h3>Subbu Poluru</h3>
+              <p>Ran product at two Austin shops. Teaches the calendar, not the manifesto.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>Staff meetings</li>
+                <li>Scope</li>
+                <li>No</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Subbu Poluru" data-course="Shipping Leadership">Ask Subbu</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">MP</div>
+              <p class="hl-label">Product</p>
+              <h3>Maya Poluru</h3>
+              <p>Writes the problem before the solution. Fifteen years of product sense, none of it from a template.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>Discovery</li>
+                <li>Bets</li>
+                <li>Critique</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Maya Poluru" data-course="Product Sense Studio">Ask Maya</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">KP</div>
+              <p class="hl-label">Design</p>
+              <h3>Kavya Poluru</h3>
+              <p>Interfaces that survive a Friday ship. Type first, decoration last.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>Systems</li>
+                <li>Type</li>
+                <li>Figma</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Kavya Poluru" data-course="Interface Craft">Ask Kavya</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">AP</div>
+              <p class="hl-label">Data</p>
+              <h3>Arjun Poluru</h3>
+              <p>Warehouse, notebook, slide. Will not let you present a vanity chart.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>SQL</li>
+                <li>Metrics</li>
+                <li>Decisions</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Arjun Poluru" data-course="Decision Systems">Ask Arjun</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">AN</div>
+              <p class="hl-label">Campus · Research</p>
+              <h3>Anika Poluru</h3>
+              <p>Seats, research studios, and the Thursday thread. Austin weekdays.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>Research</li>
+                <li>Calendar</li>
+                <li>Desk</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Anika Poluru" data-course="Research in Practice">Ask Anika</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">PP</div>
+              <p class="hl-label">Growth</p>
+              <h3>Priya Poluru</h3>
+              <p>One experiment a week. A board you can read without a decoder ring.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>Tests</li>
+                <li>Retention</li>
+                <li>Copy</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Priya Poluru" data-course="Growth Experiments">Ask Priya</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">NP</div>
+              <p class="hl-label">Engineering</p>
+              <h3>Nikhil Poluru</h3>
+              <p>Frontend from a blank file. Friday pairing, no slide decks about “the stack.”</p>
+              <ul class="hl-tags list-unstyled">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JS</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Nikhil Poluru" data-course="Frontend Foundations">Ask Nikhil</button>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <article class="hl-instructor">
+              <div class="hl-avatar" aria-hidden="true">RP</div>
+              <p class="hl-label">SQL · Ops</p>
+              <h3>Rohan Poluru</h3>
+              <p>Four weeks to a query you can run yourself. No waiting on analytics.</p>
+              <ul class="hl-tags list-unstyled">
+                <li>Joins</li>
+                <li>Ops</li>
+                <li>Labs</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost btn-sm hl-ask-instructor" data-instructor="Rohan Poluru" data-course="SQL for Operators">Ask Rohan</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section" id="how">
+      <div class="container">
+        <div class="hl-section-head">
+          <p class="hl-eyebrow">How it works</p>
+          <h2 class="hl-section-title">Pick, enroll, show up</h2>
+          <p class="hl-section-sub">Three steps. Anika Poluru sends the calendar the same day.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-md-4">
+            <article class="hl-step">
+              <span class="hl-step-num">01</span>
+              <h3>Choose a studio or path</h3>
+              <p>Filter the catalog. Paths stack three courses so you are not guessing the order.</p>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="hl-step">
+              <span class="hl-step-num">02</span>
+              <h3>Enroll with the desk</h3>
+              <p>Write Anika Poluru. Seats, invoices, and whether the next cohort still has room.</p>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="hl-step">
+              <span class="hl-step-num">03</span>
+              <h3>Critique on Thursdays</h3>
+              <p>Live studios, recorded catch-up, and office hours that are actually staffed.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section hl-section-soft" id="pricing">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="hl-section-head mb-0">
+            <p class="hl-eyebrow">Pricing</p>
+            <h2 class="hl-section-title">Audit, studio, or campus</h2>
+            <p class="hl-section-sub">Pay per month, or take the year. Teams write Anika Poluru for campus seats.</p>
+          </div>
+          <div class="hl-billing" role="group" aria-label="Billing period">
+            <button type="button" class="hl-chip is-active" id="hlBillMonth" data-billing="month">Monthly</button>
+            <button type="button" class="hl-chip" id="hlBillYear" data-billing="year">Yearly · save 2 months</button>
+          </div>
+        </div>
+        <div class="row g-3 g-lg-4 align-items-stretch">
+          <div class="col-lg-4">
+            <article class="hl-plan">
+              <p class="hl-label">Watch</p>
+              <h3>Audit</h3>
+              <p class="hl-plan-price" data-month="$0" data-year="$0">$0 <span>/ month</span></p>
+              <p>Selected lectures, no critique seat. Fine if you are browsing.</p>
+              <ul class="hl-plan-list">
+                <li><i class="bi bi-check2"></i> Recorded lectures from last term</li>
+                <li><i class="bi bi-check2"></i> Newsletter and syllabus PDFs</li>
+                <li><i class="bi bi-x"></i> Live studios and office hours</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost w-100 hl-pick-plan" data-plan="Audit">Start audit</button>
+            </article>
+          </div>
+          <div class="col-lg-4">
+            <article class="hl-plan hl-plan-featured">
+              <p class="hl-label">Most seats</p>
+              <h3>Studio</h3>
+              <p class="hl-plan-price" data-month="$29" data-year="$249">$29 <span>/ month</span></p>
+              <p>All current courses, live critique, and Thursday hours with faculty.</p>
+              <ul class="hl-plan-list">
+                <li><i class="bi bi-check2"></i> Full catalog and path sequencing</li>
+                <li><i class="bi bi-check2"></i> Weekly critique with instructors</li>
+                <li><i class="bi bi-check2"></i> Certificate when you finish a path</li>
+              </ul>
+              <button type="button" class="btn hl-btn-primary w-100 hl-pick-plan" data-plan="Studio">Choose Studio</button>
+            </article>
+          </div>
+          <div class="col-lg-4">
+            <article class="hl-plan">
+              <p class="hl-label">Teams</p>
+              <h3>Campus</h3>
+              <p class="hl-plan-price" data-month="$79" data-year="$690">$79 <span>/ month</span></p>
+              <p>Five seats, a shared path, and a private hour with Subbu Poluru.</p>
+              <ul class="hl-plan-list">
+                <li><i class="bi bi-check2"></i> Five Studio seats on one invoice</li>
+                <li><i class="bi bi-check2"></i> Private path kickoff</li>
+                <li><i class="bi bi-check2"></i> Quarterly faculty hour</li>
+              </ul>
+              <button type="button" class="btn hl-btn-ghost w-100 hl-pick-plan" data-plan="Campus">Talk to campus</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section" id="enroll">
+      <div class="container">
+        <div class="hl-enroll-panel">
+          <div class="row g-4 g-lg-5 align-items-start">
+            <div class="col-lg-5">
+              <p class="hl-eyebrow hl-eyebrow-on-dark">Enroll</p>
+              <h2 class="hl-contact-title">Write the desk. Anika Poluru writes back.</h2>
+              <p class="hl-contact-text">Seats, invoices, and whether the next cohort still has a chair. Drafts stay in this browser until you send.</p>
+              <ul class="hl-contact-facts list-unstyled">
+                <li><i class="bi bi-geo-alt"></i> 418 Congress Avenue, Austin, TX 78701</li>
+                <li><i class="bi bi-telephone"></i> <a href="tel:+15125550418">(512) 555-0418</a></li>
+                <li><i class="bi bi-envelope"></i> <a href="mailto:anika@helio.example">anika@helio.example</a></li>
+                <li><i class="bi bi-clock"></i> Weekdays 9:00–18:00 CT</li>
+              </ul>
+            </div>
+            <div class="col-lg-7">
+              <form class="hl-form" id="hlEnrollForm" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="hlName">Name</label>
+                    <input class="form-control" id="hlName" name="name" type="text" autocomplete="name" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="hlEmail">Email</label>
+                    <input class="form-control" id="hlEmail" name="email" type="email" autocomplete="email" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="hlCoursePick">Course</label>
+                    <select class="form-select" id="hlCoursePick" required>
+                      <option value="">Choose a studio</option>
+                      <option>Product Sense Studio</option>
+                      <option>Interface Craft</option>
+                      <option>Decision Systems</option>
+                      <option>Shipping Leadership</option>
+                      <option>Growth Experiments</option>
+                      <option>Frontend Foundations</option>
+                      <option>Brand Systems</option>
+                      <option>SQL for Operators</option>
+                      <option>Research in Practice</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="hlPathPick">Path (optional)</label>
+                    <select class="form-select" id="hlPathPick">
+                      <option value="">Single course</option>
+                      <option>Product Builder</option>
+                      <option>Design Lead</option>
+                      <option>Data Operator</option>
+                      <option>Founder Track</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="hlPlanPick">Plan</label>
+                    <select class="form-select" id="hlPlanPick" required>
+                      <option value="">Choose a plan</option>
+                      <option>Audit</option>
+                      <option selected>Studio</option>
+                      <option>Campus</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="hlInstructor">Instructor</label>
+                    <select class="form-select" id="hlInstructor">
+                      <option value="">Any faculty</option>
+                      <option>Subbu Poluru</option>
+                      <option>Maya Poluru</option>
+                      <option>Kavya Poluru</option>
+                      <option>Arjun Poluru</option>
+                      <option>Anika Poluru</option>
+                      <option>Priya Poluru</option>
+                      <option>Nikhil Poluru</option>
+                      <option>Rohan Poluru</option>
+                      <option>Ishaan Poluru</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="hlNotes">What you want from the term</label>
+                    <textarea class="form-control" id="hlNotes" name="notes" rows="4" placeholder="Role, deadline, team size…"></textarea>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  <button type="submit" class="btn hl-btn-primary">Send enrollment</button>
+                  <button type="button" class="btn hl-btn-ghost" id="hlSaveDraft">Save draft</button>
+                </div>
+                <p class="hl-form-note" id="hlFormNote" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section hl-section-soft" id="notes">
+      <div class="container">
+        <div class="hl-section-head">
+          <p class="hl-eyebrow">Alumni notes</p>
+          <h2 class="hl-section-title">What people say after the last critique</h2>
+          <p class="hl-section-sub">Short notes. No “life-changing” copy. Just the work.</p>
+        </div>
+        <div class="row g-3 g-lg-4">
+          <div class="col-md-6 col-lg-4">
+            <article class="hl-review">
+              <p class="hl-stars" aria-label="5 stars">★★★★★</p>
+              <p>Maya Poluru made me rewrite the problem three times. The launch we shipped after that actually held.</p>
+              <strong>Dev Poluru</strong>
+              <span>Product · Austin</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="hl-review">
+              <p class="hl-stars" aria-label="5 stars">★★★★★</p>
+              <p>Kavya Poluru’s type notes were blunt. Our app finally looks like one product instead of four files.</p>
+              <strong>Leela Poluru</strong>
+              <span>Design · Round Rock</span>
+            </article>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <article class="hl-review">
+              <p class="hl-stars" aria-label="5 stars">★★★★★</p>
+              <p>Rohan Poluru’s SQL lab ended the weekly “waiting on data” thread. I run the query now.</p>
+              <strong>Meera Poluru</strong>
+              <span>Ops · Houston</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hl-section" id="faq">
+      <div class="container">
+        <div class="hl-section-head">
+          <p class="hl-eyebrow">FAQ</p>
+          <h2 class="hl-section-title">Before you enroll</h2>
+        </div>
+        <div class="accordion hl-accordion" id="hlFaq">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#hlFaq1" aria-expanded="true" aria-controls="hlFaq1">Are the studios live or recorded?</button>
+            </h3>
+            <div id="hlFaq1" class="accordion-collapse collapse show" data-bs-parent="#hlFaq">
+              <div class="accordion-body">Live on Thursdays, recorded the same night. Audit sees last term’s recordings only. Studio and Campus get the live seat.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hlFaq2" aria-expanded="false" aria-controls="hlFaq2">Can I switch courses mid-path?</button>
+            </h3>
+            <div id="hlFaq2" class="accordion-collapse collapse" data-bs-parent="#hlFaq">
+              <div class="accordion-body">Yes, once, if the next studio still has a seat. Write Anika Poluru before week two. Paths are sequenced on purpose — she will tell you if a skip would waste the term.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hlFaq3" aria-expanded="false" aria-controls="hlFaq3">Do you refund unused months?</button>
+            </h3>
+            <div id="hlFaq3" class="accordion-collapse collapse" data-bs-parent="#hlFaq">
+              <div class="accordion-body">Monthly Studio can cancel before the next invoice. Yearly is two months free, not refundable after day fourteen. Campus invoices are quarterly.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hlFaq4" aria-expanded="false" aria-controls="hlFaq4">Is there a campus in Austin?</button>
+            </h3>
+            <div id="hlFaq4" class="accordion-collapse collapse" data-bs-parent="#hlFaq">
+              <div class="accordion-body">The desk is at 418 Congress. Studios are online. Subbu Poluru hosts an in-person office hour the first Friday of each month — seats are limited, Anika Poluru keeps the list.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="hl-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="navbar-brand hl-brand hl-brand-footer" href="#home">
+            <span class="hl-brand-mark" aria-hidden="true"><i class="bi bi-brightness-high-fill"></i></span>
+            <span>Helio<em>.</em></span>
+          </a>
+          <p class="hl-footer-text">Subbu Poluru’s online school in Austin. Courses, paths, and a desk that answers. <a href="mailto:anika@helio.example">anika@helio.example</a></p>
+          <div class="hl-social" aria-label="Social">
+            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2 class="hl-footer-heading">Campus</h2>
+          <div class="hl-footer-links">
+            <a href="#courses">Courses</a><br />
+            <a href="#paths">Paths</a><br />
+            <a href="#instructors">Instructors</a><br />
+            <a href="#pricing">Pricing</a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h2 class="hl-footer-heading">Desk</h2>
+          <div class="hl-footer-links">
+            <a href="#enroll">Enroll</a><br />
+            <a href="#faq">FAQ</a><br />
+            <a href="tel:+15125550418">(512) 555-0418</a><br />
+            <a href="#school">The school</a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <h2 class="hl-footer-heading">Syllabus notes</h2>
+          <p class="hl-footer-text">Term dates, new studios, and when seats open. Anika Poluru sends one note a month.</p>
+          <form class="hl-news" id="hlNewsForm">
+            <label class="visually-hidden" for="hlNewsEmail">Email</label>
+            <input class="form-control" id="hlNewsEmail" type="email" placeholder="you@company.com" required />
+            <button type="submit" class="btn hl-btn-primary">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="hl-footer-bottom">
+        <span>&copy; 2026 Helio · Subrahmanyam Poluru · Free for personal &amp; commercial use</span>
+        <span>Austin, TX</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="hlToast" class="toast hl-toast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <strong class="me-auto" id="hlToastTitle">Done</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="hlToastBody">Action completed.</div>
+    </div>
+  </div>
+
+  <button type="button" class="hl-back-top" id="hlBackTop" aria-label="Back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
