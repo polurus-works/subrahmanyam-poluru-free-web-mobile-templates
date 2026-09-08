@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<!--
+  Quill — Student LMS portal
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Quill — Alder Hall student LMS with courses, assignments, grades, and progress tracking." />
+  <title>Quill — Student desk · Leela Poluru</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-brand: #ff467a;
+      --color-brand-dark: #d91f5a;
+      --color-brand-deep: #9b1040;
+      --color-brand-soft: #ffe4ec;
+      --color-ink: #1a1014;
+      --color-muted: #6b5560;
+      --color-line: #ebd6dc;
+      --color-canvas: #f7f1f3;
+      --color-panel: #fffbfc;
+      --color-night: #160d11;
+      --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+      --font-display: "Roboto", ui-sans-serif, system-ui, sans-serif;
+    }
+  </style>
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="ql-body bg-canvas text-ink font-sans antialiased">
+  <a class="ql-skip-link" href="#main-content">Skip to content</a>
+  <div class="ql-overlay" id="qlOverlay" aria-hidden="true"></div>
+
+  <div class="ql-shell">
+    <aside class="ql-sidebar" id="qlSidebar" aria-label="Primary">
+      <div class="ql-brand">
+        <a class="ql-brand-link" href="#dashboard" data-view="dashboard">
+          <span class="ql-brand-mark" aria-hidden="true"><i class="bi bi-pen-fill"></i></span>
+          <span>Quill<em>.</em></span>
+        </a>
+        <button type="button" class="ql-sidebar-close lg:hidden" id="qlSidebarClose" aria-label="Close navigation">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <nav class="ql-nav">
+        <p class="ql-nav-label">Desk</p>
+        <ul class="ql-nav-list">
+          <li>
+            <a class="ql-nav-link is-active" href="#dashboard" data-view="dashboard" aria-current="page">
+              <i class="bi bi-grid-1x2"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a class="ql-nav-link" href="#courses" data-view="courses">
+              <i class="bi bi-journal-bookmark"></i><span>Courses</span>
+            </a>
+          </li>
+          <li>
+            <a class="ql-nav-link" href="#assignments" data-view="assignments">
+              <i class="bi bi-clipboard-check"></i><span>Assignments</span>
+              <span class="ql-nav-badge" id="qlDueBadge">4</span>
+            </a>
+          </li>
+          <li>
+            <a class="ql-nav-link" href="#grades" data-view="grades">
+              <i class="bi bi-award"></i><span>Grades</span>
+            </a>
+          </li>
+          <li>
+            <a class="ql-nav-link" href="#progress" data-view="progress">
+              <i class="bi bi-graph-up"></i><span>Progress</span>
+            </a>
+          </li>
+        </ul>
+        <p class="ql-nav-label">Campus</p>
+        <ul class="ql-nav-list">
+          <li>
+            <a class="ql-nav-link" href="#schedule" data-view="schedule">
+              <i class="bi bi-calendar-week"></i><span>Schedule</span>
+            </a>
+          </li>
+          <li>
+            <a class="ql-nav-link" href="#messages" data-view="messages">
+              <i class="bi bi-chat-dots"></i><span>Messages</span>
+              <span class="ql-nav-badge">2</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="ql-sidebar-foot">
+        <div class="ql-staff">
+          <span class="ql-avatar">LP</span>
+          <p><strong>Leela Poluru</strong>Year 2 · Product design</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="ql-main">
+      <header class="ql-topbar">
+        <button type="button" class="ql-menu-btn lg:hidden" id="qlMenuBtn" aria-label="Open navigation" aria-controls="qlSidebar">
+          <i class="bi bi-list"></i>
+        </button>
+        <p class="ql-crumb mb-0">Alder Hall / <strong id="qlCrumb">Dashboard</strong></p>
+        <form class="ql-search" id="qlTopSearchForm" role="search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input id="qlTopSearch" type="search" placeholder="Search courses, assignments…" aria-label="Search the student desk" />
+        </form>
+        <button type="button" class="ql-icon-btn" id="qlBellBtn" aria-label="Notifications, 2 unread">
+          <i class="bi bi-bell"></i>
+          <span class="ql-dot"></span>
+        </button>
+        <span class="ql-avatar" aria-hidden="true">LP</span>
+      </header>
+
+      <main id="main-content" class="ql-content" tabindex="-1">
+        <!-- Dashboard ------------------------------------------------ -->
+        <section class="ql-view is-active" id="view-dashboard" data-title="Dashboard" aria-labelledby="dash-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker" id="qlClock">Monday, September 7</p>
+              <h1 class="ql-page-title font-display" id="dash-title">Good evening, Leela.</h1>
+              <p class="ql-page-sub">Fall term at Alder Hall — four due this week, critique with Maya Poluru on Thursday.</p>
+            </div>
+            <button type="button" class="ql-btn ql-btn-primary" data-view-jump="assignments">
+              <i class="bi bi-clipboard-check"></i> Open assignments
+            </button>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <article class="ql-stat">
+              <p class="ql-stat-label">Term GPA</p>
+              <p class="ql-stat-value font-display">3.62</p>
+              <p class="ql-stat-meta">Up 0.08 from summer</p>
+            </article>
+            <article class="ql-stat">
+              <p class="ql-stat-label">Due this week</p>
+              <p class="ql-stat-value font-display">4</p>
+              <p class="ql-stat-meta">One already submitted</p>
+            </article>
+            <article class="ql-stat">
+              <p class="ql-stat-label">Hours logged</p>
+              <p class="ql-stat-value font-display">11.5</p>
+              <p class="ql-stat-meta">Studio + labs this week</p>
+            </article>
+            <article class="ql-stat">
+              <p class="ql-stat-label">Term progress</p>
+              <p class="ql-stat-value font-display">68%</p>
+              <p class="ql-stat-meta">18 of 24 credits posted</p>
+            </article>
+          </div>
+
+          <div class="grid gap-4 xl:grid-cols-3 mt-4">
+            <article class="ql-card xl:col-span-2">
+              <div class="ql-card-head">
+                <h2 class="ql-card-title">Continue</h2>
+                <button type="button" class="ql-text-btn" data-view-jump="courses">All courses</button>
+              </div>
+              <div class="ql-continue">
+                <div class="ql-continue-visual" aria-hidden="true"><i class="bi bi-lightbulb"></i></div>
+                <div class="ql-continue-body">
+                  <p class="ql-kicker">Maya Poluru · Thursday 16:00</p>
+                  <h3>Product Sense Studio</h3>
+                  <p>Rewrite the problem brief before critique. Maya Poluru asked for one sentence, not a slide.</p>
+                  <div class="ql-progress" aria-label="Course progress 78 percent">
+                    <span style="width: 78%"></span>
+                  </div>
+                  <p class="ql-progress-label">78% through the studio</p>
+                  <button type="button" class="ql-btn ql-btn-primary" data-open-course="product">Resume studio</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="ql-card">
+              <div class="ql-card-head">
+                <h2 class="ql-card-title">Up next</h2>
+                <button type="button" class="ql-text-btn" data-view-jump="assignments">Board</button>
+              </div>
+              <ul class="ql-feed">
+                <li>
+                  <span class="ql-feed-when">Wed</span>
+                  <div>
+                    <strong>Query lab 3</strong>
+                    <span>Rohan Poluru · SQL · submitted</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="ql-feed-when">Thu</span>
+                  <div>
+                    <strong>Problem brief</strong>
+                    <span>Maya Poluru · Product · due 18:00</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="ql-feed-when">Fri</span>
+                  <div>
+                    <strong>Type specimen</strong>
+                    <span>Kavya Poluru · Craft · due 12:00</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="ql-feed-when">Mon</span>
+                  <div>
+                    <strong>Staff memo</strong>
+                    <span>Subbu Poluru · Leadership</span>
+                  </div>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="grid gap-4 lg:grid-cols-2 mt-4">
+            <article class="ql-card">
+              <div class="ql-card-head">
+                <h2 class="ql-card-title">Recent marks</h2>
+                <button type="button" class="ql-text-btn" data-view-jump="grades">Gradebook</button>
+              </div>
+              <ul class="ql-grade-pills">
+                <li><strong>A</strong><span>Frontend lab 7 · Nikhil Poluru</span></li>
+                <li><strong>A-</strong><span>SQL capstone · Rohan Poluru</span></li>
+                <li><strong>B+</strong><span>Interface critique 2 · Kavya Poluru</span></li>
+                <li><strong>B</strong><span>Metric memo · Arjun Poluru</span></li>
+              </ul>
+            </article>
+            <article class="ql-card">
+              <div class="ql-card-head">
+                <h2 class="ql-card-title">From faculty</h2>
+                <button type="button" class="ql-text-btn" data-view-jump="messages">Inbox</button>
+              </div>
+              <ul class="ql-feed">
+                <li>
+                  <span class="ql-avatar ql-avatar-sm">MP</span>
+                  <div>
+                    <strong>Maya Poluru</strong>
+                    <span>Bring one sentence to Thursday. Cut the rest.</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="ql-avatar ql-avatar-sm">AN</span>
+                  <div>
+                    <strong>Anika Poluru</strong>
+                    <span>Office hour moved to Friday 10:00. Seats still open.</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="ql-avatar ql-avatar-sm">SP</span>
+                  <div>
+                    <strong>Subbu Poluru</strong>
+                    <span>Staff memo: no more than a page. I will stop at a page.</span>
+                  </div>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- Courses -------------------------------------------------- -->
+        <section class="ql-view" id="view-courses" data-title="Courses" hidden aria-labelledby="courses-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker">Fall 2026 · 6 studios</p>
+              <h1 class="ql-page-title font-display" id="courses-title">Courses</h1>
+              <p class="ql-page-sub">Leela Poluru’s board. Filter, then resume a studio or jump to its assignments.</p>
+            </div>
+          </div>
+          <div class="ql-toolbar">
+            <div class="ql-chips" role="group" aria-label="Filter courses">
+              <button type="button" class="ql-chip is-active" data-course-filter="all">All</button>
+              <button type="button" class="ql-chip" data-course-filter="active">In progress</button>
+              <button type="button" class="ql-chip" data-course-filter="done">Completed</button>
+            </div>
+            <p class="ql-result" id="qlCourseCount">Showing 6 courses</p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="qlCourseGrid">
+            <article class="ql-course" data-status="active" data-course="product" data-name="Product Sense Studio">
+              <div class="ql-course-visual ql-visual-a" aria-hidden="true"><i class="bi bi-lightbulb"></i></div>
+              <div class="ql-course-body">
+                <div class="ql-course-meta">
+                  <span class="ql-pill">Product</span>
+                  <span>78%</span>
+                </div>
+                <h2>Product Sense Studio</h2>
+                <p>Maya Poluru · Thu 16:00 · 22 seats</p>
+                <div class="ql-progress" aria-hidden="true"><span style="width:78%"></span></div>
+                <div class="ql-course-actions">
+                  <button type="button" class="ql-btn ql-btn-primary" data-open-course="product">Resume</button>
+                  <button type="button" class="ql-btn ql-btn-ghost" data-view-jump="assignments" data-assign-course="product">Work</button>
+                </div>
+              </div>
+            </article>
+            <article class="ql-course" data-status="active" data-course="craft" data-name="Interface Craft">
+              <div class="ql-course-visual ql-visual-b" aria-hidden="true"><i class="bi bi-vector-pen"></i></div>
+              <div class="ql-course-body">
+                <div class="ql-course-meta">
+                  <span class="ql-pill">Design</span>
+                  <span>62%</span>
+                </div>
+                <h2>Interface Craft</h2>
+                <p>Kavya Poluru · Tue 14:00 · 18 seats</p>
+                <div class="ql-progress" aria-hidden="true"><span style="width:62%"></span></div>
+                <div class="ql-course-actions">
+                  <button type="button" class="ql-btn ql-btn-primary" data-open-course="craft">Resume</button>
+                  <button type="button" class="ql-btn ql-btn-ghost" data-view-jump="assignments" data-assign-course="craft">Work</button>
+                </div>
+              </div>
+            </article>
+            <article class="ql-course" data-status="active" data-course="data" data-name="Decision Systems">
+              <div class="ql-course-visual ql-visual-c" aria-hidden="true"><i class="bi bi-graph-up-arrow"></i></div>
+              <div class="ql-course-body">
+                <div class="ql-course-meta">
+                  <span class="ql-pill">Data</span>
+                  <span>54%</span>
+                </div>
+                <h2>Decision Systems</h2>
+                <p>Arjun Poluru · Wed 10:00 · 20 seats</p>
+                <div class="ql-progress" aria-hidden="true"><span style="width:54%"></span></div>
+                <div class="ql-course-actions">
+                  <button type="button" class="ql-btn ql-btn-primary" data-open-course="data">Resume</button>
+                  <button type="button" class="ql-btn ql-btn-ghost" data-view-jump="assignments" data-assign-course="data">Work</button>
+                </div>
+              </div>
+            </article>
+            <article class="ql-course" data-status="active" data-course="frontend" data-name="Frontend Foundations">
+              <div class="ql-course-visual ql-visual-d" aria-hidden="true"><i class="bi bi-code-slash"></i></div>
+              <div class="ql-course-body">
+                <div class="ql-course-meta">
+                  <span class="ql-pill">Engineering</span>
+                  <span>91%</span>
+                </div>
+                <h2>Frontend Foundations</h2>
+                <p>Nikhil Poluru · Fri 11:00 · 24 seats</p>
+                <div class="ql-progress" aria-hidden="true"><span style="width:91%"></span></div>
+                <div class="ql-course-actions">
+                  <button type="button" class="ql-btn ql-btn-primary" data-open-course="frontend">Resume</button>
+                  <button type="button" class="ql-btn ql-btn-ghost" data-view-jump="assignments" data-assign-course="frontend">Work</button>
+                </div>
+              </div>
+            </article>
+            <article class="ql-course" data-status="active" data-course="lead" data-name="Shipping Leadership">
+              <div class="ql-course-visual ql-visual-e" aria-hidden="true"><i class="bi bi-flag"></i></div>
+              <div class="ql-course-body">
+                <div class="ql-course-meta">
+                  <span class="ql-pill ql-pill-alt">Leadership</span>
+                  <span>41%</span>
+                </div>
+                <h2>Shipping Leadership</h2>
+                <p>Subbu Poluru · Mon 17:00 · 16 seats</p>
+                <div class="ql-progress" aria-hidden="true"><span style="width:41%"></span></div>
+                <div class="ql-course-actions">
+                  <button type="button" class="ql-btn ql-btn-primary" data-open-course="lead">Resume</button>
+                  <button type="button" class="ql-btn ql-btn-ghost" data-view-jump="assignments" data-assign-course="lead">Work</button>
+                </div>
+              </div>
+            </article>
+            <article class="ql-course" data-status="done" data-course="sql" data-name="SQL for Operators">
+              <div class="ql-course-visual ql-visual-f" aria-hidden="true"><i class="bi bi-table"></i></div>
+              <div class="ql-course-body">
+                <div class="ql-course-meta">
+                  <span class="ql-pill">Data</span>
+                  <span>100%</span>
+                </div>
+                <h2>SQL for Operators</h2>
+                <p>Rohan Poluru · Completed · Grade A</p>
+                <div class="ql-progress" aria-hidden="true"><span style="width:100%"></span></div>
+                <div class="ql-course-actions">
+                  <button type="button" class="ql-btn ql-btn-ghost" data-open-course="sql">Review</button>
+                  <button type="button" class="ql-btn ql-btn-ghost" data-view-jump="grades">Marks</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <p class="ql-empty" id="qlCourseEmpty" hidden>No studios match that filter.</p>
+        </section>
+
+        <!-- Assignments ---------------------------------------------- -->
+        <section class="ql-view" id="view-assignments" data-title="Assignments" hidden aria-labelledby="assign-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker">Work board</p>
+              <h1 class="ql-page-title font-display" id="assign-title">Assignments</h1>
+              <p class="ql-page-sub">Due dates, status, and a submit action that stays in this browser.</p>
+            </div>
+          </div>
+          <div class="ql-toolbar">
+            <div class="ql-chips" role="group" aria-label="Filter assignments">
+              <button type="button" class="ql-chip is-active" data-assign-filter="all">All</button>
+              <button type="button" class="ql-chip" data-assign-filter="due">Due</button>
+              <button type="button" class="ql-chip" data-assign-filter="submitted">Submitted</button>
+              <button type="button" class="ql-chip" data-assign-filter="overdue">Overdue</button>
+            </div>
+            <p class="ql-result" id="qlAssignCount">Showing 6 assignments</p>
+          </div>
+          <div class="ql-card ql-card-flush">
+            <div class="ql-table-wrap">
+              <table class="ql-table">
+                <thead>
+                  <tr>
+                    <th>Assignment</th>
+                    <th>Course</th>
+                    <th>Due</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="qlAssignBody">
+                  <tr data-status="overdue" data-course="frontend" data-name="Accessible form lab">
+                    <td>
+                      <strong>Accessible form lab</strong>
+                      <span>Nikhil Poluru asked for labels, not placeholders.</span>
+                    </td>
+                    <td>Frontend Foundations</td>
+                    <td>Sep 5</td>
+                    <td><span class="ql-status is-overdue">Overdue</span></td>
+                    <td><button type="button" class="ql-btn ql-btn-primary ql-btn-sm ql-submit-work" data-work="Accessible form lab">Submit</button></td>
+                  </tr>
+                  <tr data-status="submitted" data-course="sql" data-name="Query lab 3">
+                    <td>
+                      <strong>Query lab 3</strong>
+                      <span>Joins on the ops warehouse. Rohan Poluru marked it in.</span>
+                    </td>
+                    <td>SQL for Operators</td>
+                    <td>Sep 9</td>
+                    <td><span class="ql-status is-done">Submitted</span></td>
+                    <td><button type="button" class="ql-text-btn" data-view-jump="grades">Mark</button></td>
+                  </tr>
+                  <tr data-status="due" data-course="product" data-name="Problem brief">
+                    <td>
+                      <strong>Problem brief</strong>
+                      <span>One sentence for Maya Poluru’s Thursday critique.</span>
+                    </td>
+                    <td>Product Sense Studio</td>
+                    <td>Sep 10</td>
+                    <td><span class="ql-status is-due">Due</span></td>
+                    <td><button type="button" class="ql-btn ql-btn-primary ql-btn-sm ql-submit-work" data-work="Problem brief">Submit</button></td>
+                  </tr>
+                  <tr data-status="due" data-course="craft" data-name="Type specimen">
+                    <td>
+                      <strong>Type specimen</strong>
+                      <span>Kavya Poluru: two sizes, one family, no decoration.</span>
+                    </td>
+                    <td>Interface Craft</td>
+                    <td>Sep 12</td>
+                    <td><span class="ql-status is-due">Due</span></td>
+                    <td><button type="button" class="ql-btn ql-btn-primary ql-btn-sm ql-submit-work" data-work="Type specimen">Submit</button></td>
+                  </tr>
+                  <tr data-status="due" data-course="lead" data-name="Staff memo">
+                    <td>
+                      <strong>Staff memo</strong>
+                      <span>Subbu Poluru stops reading at one page.</span>
+                    </td>
+                    <td>Shipping Leadership</td>
+                    <td>Sep 14</td>
+                    <td><span class="ql-status is-due">Due</span></td>
+                    <td><button type="button" class="ql-btn ql-btn-primary ql-btn-sm ql-submit-work" data-work="Staff memo">Submit</button></td>
+                  </tr>
+                  <tr data-status="due" data-course="data" data-name="Metric memo">
+                    <td>
+                      <strong>Metric memo</strong>
+                      <span>Arjun Poluru: one chart that changes a meeting.</span>
+                    </td>
+                    <td>Decision Systems</td>
+                    <td>Sep 16</td>
+                    <td><span class="ql-status is-due">Due</span></td>
+                    <td><button type="button" class="ql-btn ql-btn-primary ql-btn-sm ql-submit-work" data-work="Metric memo">Submit</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="ql-empty" id="qlAssignEmpty" hidden>No assignments in that filter.</p>
+          </div>
+        </section>
+
+        <!-- Grades --------------------------------------------------- -->
+        <section class="ql-view" id="view-grades" data-title="Grades" hidden aria-labelledby="grades-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker">Gradebook · Fall 2026</p>
+              <h1 class="ql-page-title font-display" id="grades-title">Grades</h1>
+              <p class="ql-page-sub">Posted marks for Leela Poluru. SQL is closed. Leadership is still in flight.</p>
+            </div>
+            <button type="button" class="ql-btn ql-btn-ghost" id="qlTranscriptBtn">
+              <i class="bi bi-download"></i> Transcript
+            </button>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3 mb-4">
+            <article class="ql-stat"><p class="ql-stat-label">GPA</p><p class="ql-stat-value font-display">3.62</p><p class="ql-stat-meta">On a 4.0 scale</p></article>
+            <article class="ql-stat"><p class="ql-stat-label">Credits posted</p><p class="ql-stat-value font-display">18</p><p class="ql-stat-meta">6 still in studio</p></article>
+            <article class="ql-stat"><p class="ql-stat-label">Standing</p><p class="ql-stat-value font-display">Good</p><p class="ql-stat-meta">Anika Poluru, advisor</p></article>
+          </div>
+          <div class="ql-card ql-card-flush">
+            <div class="ql-table-wrap">
+              <table class="ql-table">
+                <thead>
+                  <tr>
+                    <th>Course</th>
+                    <th>Instructor</th>
+                    <th>Assessment</th>
+                    <th>Mark</th>
+                    <th>Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Frontend Foundations</td>
+                    <td>Nikhil Poluru</td>
+                    <td>Lab 7</td>
+                    <td><span class="ql-mark">A</span></td>
+                    <td>Labels were honest. Ship it.</td>
+                  </tr>
+                  <tr>
+                    <td>SQL for Operators</td>
+                    <td>Rohan Poluru</td>
+                    <td>Capstone</td>
+                    <td><span class="ql-mark">A</span></td>
+                    <td>Query runs without a decoder ring.</td>
+                  </tr>
+                  <tr>
+                    <td>Product Sense Studio</td>
+                    <td>Maya Poluru</td>
+                    <td>Brief 1</td>
+                    <td><span class="ql-mark">A-</span></td>
+                    <td>Cut to one sentence next time.</td>
+                  </tr>
+                  <tr>
+                    <td>Interface Craft</td>
+                    <td>Kavya Poluru</td>
+                    <td>Critique 2</td>
+                    <td><span class="ql-mark">B+</span></td>
+                    <td>Type is close. Spacing is not.</td>
+                  </tr>
+                  <tr>
+                    <td>Decision Systems</td>
+                    <td>Arjun Poluru</td>
+                    <td>Metric memo</td>
+                    <td><span class="ql-mark">B</span></td>
+                    <td>The chart still argues two things.</td>
+                  </tr>
+                  <tr>
+                    <td>Shipping Leadership</td>
+                    <td>Subbu Poluru</td>
+                    <td>Staff memo</td>
+                    <td><span class="ql-mark ql-mark-muted">—</span></td>
+                    <td>Not posted. Due Sep 14.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress ------------------------------------------------- -->
+        <section class="ql-view" id="view-progress" data-title="Progress" hidden aria-labelledby="progress-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker">Term path</p>
+              <h1 class="ql-page-title font-display" id="progress-title">Progress</h1>
+              <p class="ql-page-sub">Credits, studio completion, and hours Anika Poluru can actually defend.</p>
+            </div>
+          </div>
+          <div class="grid gap-4 lg:grid-cols-3">
+            <article class="ql-card lg:col-span-2">
+              <h2 class="ql-card-title">Studios this term</h2>
+              <ul class="ql-bars">
+                <li>
+                  <div><strong>Frontend Foundations</strong><span>91%</span></div>
+                  <div class="ql-progress"><span style="width:91%"></span></div>
+                </li>
+                <li>
+                  <div><strong>SQL for Operators</strong><span>100%</span></div>
+                  <div class="ql-progress"><span style="width:100%"></span></div>
+                </li>
+                <li>
+                  <div><strong>Product Sense Studio</strong><span>78%</span></div>
+                  <div class="ql-progress"><span style="width:78%"></span></div>
+                </li>
+                <li>
+                  <div><strong>Interface Craft</strong><span>62%</span></div>
+                  <div class="ql-progress"><span style="width:62%"></span></div>
+                </li>
+                <li>
+                  <div><strong>Decision Systems</strong><span>54%</span></div>
+                  <div class="ql-progress"><span style="width:54%"></span></div>
+                </li>
+                <li>
+                  <div><strong>Shipping Leadership</strong><span>41%</span></div>
+                  <div class="ql-progress"><span style="width:41%"></span></div>
+                </li>
+              </ul>
+            </article>
+            <article class="ql-card">
+              <h2 class="ql-card-title">Credits</h2>
+              <div class="ql-ring" style="--ql-ring: 68" role="img" aria-label="68 percent of term credits">
+                <strong class="font-display">68%</strong>
+                <span>18 / 24 cr</span>
+              </div>
+              <p class="ql-page-sub text-center mt-3">Year 2, product design. Advisor: Anika Poluru.</p>
+            </article>
+          </div>
+          <div class="grid gap-4 lg:grid-cols-2 mt-4">
+            <article class="ql-card">
+              <h2 class="ql-card-title">Hours this week</h2>
+              <ul class="ql-week">
+                <li><span>Mon</span><b style="height:42%"></b></li>
+                <li><span>Tue</span><b style="height:70%"></b></li>
+                <li><span>Wed</span><b style="height:55%"></b></li>
+                <li><span>Thu</span><b style="height:88%"></b></li>
+                <li><span>Fri</span><b style="height:36%"></b></li>
+                <li><span>Sat</span><b style="height:18%"></b></li>
+                <li><span>Sun</span><b style="height:8%"></b></li>
+              </ul>
+              <p class="ql-stat-meta mt-3">11.5 hours · Thursday is critique with Maya Poluru.</p>
+            </article>
+            <article class="ql-card">
+              <h2 class="ql-card-title">Skills on the desk</h2>
+              <ul class="ql-skills">
+                <li><span>Critique</span><div class="ql-progress"><span style="width:74%"></span></div></li>
+                <li><span>Type</span><div class="ql-progress"><span style="width:61%"></span></div></li>
+                <li><span>SQL</span><div class="ql-progress"><span style="width:96%"></span></div></li>
+                <li><span>Shipping</span><div class="ql-progress"><span style="width:48%"></span></div></li>
+                <li><span>Frontend</span><div class="ql-progress"><span style="width:89%"></span></div></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- Schedule ------------------------------------------------- -->
+        <section class="ql-view" id="view-schedule" data-title="Schedule" hidden aria-labelledby="sched-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker">Week of Sep 7</p>
+              <h1 class="ql-page-title font-display" id="sched-title">Schedule</h1>
+              <p class="ql-page-sub">Live studios and office hours. Recordings land the same night.</p>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <article class="ql-card">
+              <p class="ql-kicker">Monday</p>
+              <h2>Shipping Leadership</h2>
+              <p>17:00–18:30 · Subbu Poluru · Room live</p>
+            </article>
+            <article class="ql-card">
+              <p class="ql-kicker">Tuesday</p>
+              <h2>Interface Craft</h2>
+              <p>14:00–16:00 · Kavya Poluru · Figma studio</p>
+            </article>
+            <article class="ql-card">
+              <p class="ql-kicker">Wednesday</p>
+              <h2>Decision Systems</h2>
+              <p>10:00–12:00 · Arjun Poluru · Notebook lab</p>
+            </article>
+            <article class="ql-card">
+              <p class="ql-kicker">Thursday</p>
+              <h2>Product Sense · Critique</h2>
+              <p>16:00–18:00 · Maya Poluru · Bring one sentence</p>
+            </article>
+            <article class="ql-card">
+              <p class="ql-kicker">Friday</p>
+              <h2>Frontend pairing</h2>
+              <p>11:00–12:30 · Nikhil Poluru · Lab 8</p>
+            </article>
+            <article class="ql-card">
+              <p class="ql-kicker">Friday</p>
+              <h2>Advisor hour</h2>
+              <p>10:00–10:30 · Anika Poluru · Optional</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Messages ------------------------------------------------- -->
+        <section class="ql-view" id="view-messages" data-title="Messages" hidden aria-labelledby="msg-title">
+          <div class="ql-page-head">
+            <div>
+              <p class="ql-kicker">Inbox</p>
+              <h1 class="ql-page-title font-display" id="msg-title">Messages</h1>
+              <p class="ql-page-sub">Faculty notes. Reply is a demo — Anika Poluru still holds the real desk.</p>
+            </div>
+          </div>
+          <div class="grid gap-4 lg:grid-cols-5">
+            <div class="lg:col-span-2 space-y-3">
+              <button type="button" class="ql-msg is-active" data-thread="maya">
+                <span class="ql-avatar">MP</span>
+                <span>
+                  <strong>Maya Poluru</strong>
+                  <em>Bring one sentence to Thursday.</em>
+                </span>
+              </button>
+              <button type="button" class="ql-msg" data-thread="anika">
+                <span class="ql-avatar">AN</span>
+                <span>
+                  <strong>Anika Poluru</strong>
+                  <em>Office hour moved to Friday 10:00.</em>
+                </span>
+              </button>
+              <button type="button" class="ql-msg" data-thread="subbu">
+                <span class="ql-avatar">SP</span>
+                <span>
+                  <strong>Subbu Poluru</strong>
+                  <em>Staff memo: I will stop at a page.</em>
+                </span>
+              </button>
+            </div>
+            <article class="ql-card lg:col-span-3" id="qlThread">
+              <p class="ql-kicker">Maya Poluru · Product Sense</p>
+              <h2 class="ql-card-title">Thursday critique</h2>
+              <p>Leela — rewrite the brief to one sentence. If it needs a slide, it is not ready. See you at 16:00.</p>
+              <form class="ql-reply" id="qlReplyForm">
+                <label class="sr-only" for="qlReply">Reply</label>
+                <textarea id="qlReply" rows="3" placeholder="Reply to Maya Poluru…" required></textarea>
+                <button type="submit" class="ql-btn ql-btn-primary">Send</button>
+              </form>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="ql-toast" id="qlToast" role="status" aria-live="polite">
+    <i class="bi bi-check-circle-fill"></i>
+    <div>
+      <strong id="qlToastTitle">Done</strong>
+      <p id="qlToastBody">Action completed.</p>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
