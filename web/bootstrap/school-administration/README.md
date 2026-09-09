@@ -1,0 +1,1 @@
+School Administration	school-administration	Education management dashboard for students, teachers, classes, attendance, and reports.
