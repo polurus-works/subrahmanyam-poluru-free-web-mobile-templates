@@ -1,24 +1,581 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
-  Lotline — Real estate marketplace
+  Ledger — Teacher gradebook
   Author: Subrahmanyam Poluru
   Website: https://polurus.com
   License: Free for Personal and Commercial Use
 -->
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
-    </style>
-  </head>
-  <body>
-    <h1 class="text-3xl font-bold underline text-clifford">
-      Hello world!
-    </h1>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Ledger — teacher gradebook for Kavya Poluru: classes, scores, attendance, and report cards." />
+  <title>Ledger — Gradebook · Kavya Poluru</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-brand: #0f3040;
+      --color-brand-dark: #0a212c;
+      --color-brand-deep: #0f3040;
+      --color-brand-soft: #e4eef1;
+      --color-ink: #12262e;
+      --color-muted: #5b717a;
+      --color-line: #d4e0e4;
+      --color-canvas: #f3f6f7;
+      --color-panel: #ffffff;
+      --color-night: #0f3040;
+      --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+      --font-display: "Roboto", ui-sans-serif, system-ui, sans-serif;
+    }
+  </style>
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="gb-body bg-canvas text-ink font-sans antialiased">
+  <a class="gb-skip-link" href="#main-content">Skip to content</a>
+  <div class="gb-overlay" id="gbOverlay" aria-hidden="true"></div>
+
+  <div class="gb-shell">
+    <aside class="gb-sidebar" id="gbSidebar" aria-label="Primary">
+      <div class="gb-brand">
+        <a class="gb-brand-link" href="#dashboard" data-view="dashboard">
+          <span class="gb-brand-mark" aria-hidden="true"><i class="bi bi-journal-check"></i></span>
+          <span>Ledger<em>.</em></span>
+        </a>
+        <button type="button" class="gb-sidebar-close lg:hidden" id="gbSidebarClose" aria-label="Close navigation">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <nav class="gb-nav">
+        <p class="gb-nav-label">Desk</p>
+        <ul class="gb-nav-list">
+          <li>
+            <a class="gb-nav-link is-active" href="#dashboard" data-view="dashboard" aria-current="page">
+              <i class="bi bi-grid-1x2"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a class="gb-nav-link" href="#classes" data-view="classes">
+              <i class="bi bi-collection"></i><span>Classes</span>
+            </a>
+          </li>
+          <li>
+            <a class="gb-nav-link" href="#scores" data-view="scores">
+              <i class="bi bi-table"></i><span>Scores</span>
+              <span class="gb-nav-badge">3</span>
+            </a>
+          </li>
+          <li>
+            <a class="gb-nav-link" href="#attendance" data-view="attendance">
+              <i class="bi bi-clipboard-check"></i><span>Attendance</span>
+            </a>
+          </li>
+          <li>
+            <a class="gb-nav-link" href="#reports" data-view="reports">
+              <i class="bi bi-file-earmark-text"></i><span>Report cards</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="gb-sidebar-foot">
+        <div class="gb-staff">
+          <span class="gb-avatar">KP</span>
+          <p><strong>Kavya Poluru</strong>English · Ashbury</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="gb-main">
+      <header class="gb-topbar">
+        <button type="button" class="gb-menu-btn lg:hidden" id="gbMenuBtn" aria-label="Open navigation" aria-controls="gbSidebar">
+          <i class="bi bi-list"></i>
+        </button>
+        <p class="gb-crumb mb-0">Ashbury / <strong id="gbCrumb">Dashboard</strong></p>
+        <div class="gb-sections" role="group" aria-label="Active section">
+          <button type="button" class="gb-section-chip is-active" data-section-chip="lit11a">Lit 11A</button>
+          <button type="button" class="gb-section-chip" data-section-chip="lit11b">Lit 11B</button>
+          <button type="button" class="gb-section-chip" data-section-chip="homeroom">Homeroom</button>
+        </div>
+        <form class="gb-search" id="gbTopSearchForm" role="search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input id="gbTopSearch" type="search" placeholder="Search students…" aria-label="Search the gradebook" />
+        </form>
+        <button type="button" class="gb-icon-btn" id="gbBellBtn" aria-label="Notifications, 3 ungraded">
+          <i class="bi bi-bell"></i>
+          <span class="gb-dot"></span>
+        </button>
+        <span class="gb-avatar gb-avatar-ink" aria-hidden="true">KP</span>
+      </header>
+
+      <main id="main-content" class="gb-content" tabindex="-1">
+        <section class="gb-view is-active" id="view-dashboard" data-title="Dashboard" aria-labelledby="dash-title">
+          <div class="gb-page-head">
+            <div>
+              <p class="gb-kicker" id="gbClock">Tuesday, September 8</p>
+              <h1 class="gb-page-title font-display" id="dash-title">Good evening, Kavya.</h1>
+              <p class="gb-page-sub"><span id="gbSectionLabel">Literature 11A</span> — three essays still open, attendance is live for period 3.</p>
+            </div>
+            <button type="button" class="gb-btn gb-btn-primary" data-view-jump="scores">
+              <i class="bi bi-table"></i> Open scores
+            </button>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <article class="gb-stat">
+              <p class="gb-stat-label">Students</p>
+              <p class="gb-stat-value font-display">62</p>
+              <p class="gb-stat-meta">Across three sections</p>
+            </article>
+            <article class="gb-stat">
+              <p class="gb-stat-label">To grade</p>
+              <p class="gb-stat-value font-display">3</p>
+              <p class="gb-stat-meta">Essay 2 · Lit 11A</p>
+            </article>
+            <article class="gb-stat">
+              <p class="gb-stat-label">Class average</p>
+              <p class="gb-stat-value font-display">87%</p>
+              <p class="gb-stat-meta">Up 2 points this week</p>
+            </article>
+            <article class="gb-stat">
+              <p class="gb-stat-label">Attendance</p>
+              <p class="gb-stat-value font-display">96%</p>
+              <p class="gb-stat-meta">One tardy this morning</p>
+            </article>
+          </div>
+
+          <div class="grid gap-4 xl:grid-cols-3 mt-4">
+            <article class="gb-card xl:col-span-2">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Needs a mark</h2>
+                <button type="button" class="gb-text-btn" data-view-jump="scores">Gradebook</button>
+              </div>
+              <ul class="gb-feed">
+                <li>
+                  <span class="gb-feed-when">Essay</span>
+                  <div>
+                    <strong>Leela Poluru · Essay 2</strong>
+                    <span>Submitted Sep 7 · Lit 11A</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="gb-feed-when">Essay</span>
+                  <div>
+                    <strong>Tara Poluru · Essay 2</strong>
+                    <span>Submitted Sep 8 · Lit 11A</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="gb-feed-when">Quiz</span>
+                  <div>
+                    <strong>Ishaan Poluru · Quiz 4</strong>
+                    <span>Make-up from sports travel</span>
+                  </div>
+                </li>
+              </ul>
+            </article>
+            <article class="gb-card">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Today</h2>
+                <button type="button" class="gb-text-btn" data-view-jump="attendance">Roster</button>
+              </div>
+              <ul class="gb-feed">
+                <li>
+                  <span class="gb-avatar gb-avatar-ink" style="width:2rem;height:2rem;font-size:0.68rem">DP</span>
+                  <div>
+                    <strong>Dev Poluru</strong>
+                    <span>Absent · Homeroom note from Maya Poluru</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="gb-avatar gb-avatar-ink" style="width:2rem;height:2rem;font-size:0.68rem">TP</span>
+                  <div>
+                    <strong>Tara Poluru</strong>
+                    <span>Tardy period 1 · Priya Poluru copied</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="gb-avatar gb-avatar-ink" style="width:2rem;height:2rem;font-size:0.68rem">SP</span>
+                  <div>
+                    <strong>Subbu Poluru</strong>
+                    <span>Walkthrough of Lit 11A on Thursday</span>
+                  </div>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="gb-view" id="view-classes" hidden aria-labelledby="classes-title">
+          <div class="gb-page-head">
+            <div>
+              <p class="gb-kicker">Fall 2026</p>
+              <h1 class="gb-page-title font-display" id="classes-title">Classes</h1>
+              <p class="gb-page-sub">Kavya Poluru’s board at Ashbury. Switch a section from the top bar, then open scores or attendance.</p>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <article class="gb-course">
+              <div class="gb-course-visual gb-visual-a" aria-hidden="true"><i class="bi bi-book"></i></div>
+              <div class="gb-course-body">
+                <p class="gb-kicker">Period 3 · Room 118</p>
+                <h2>Literature 11A</h2>
+                <p>24 students · average 88% · 3 to grade</p>
+                <div class="gb-progress" aria-hidden="true"><span style="width:72%"></span></div>
+                <div class="gb-course-actions">
+                  <button type="button" class="gb-btn gb-btn-primary" data-view-jump="scores" data-section="lit11a">Scores</button>
+                  <button type="button" class="gb-btn gb-btn-ghost" data-view-jump="attendance" data-section="lit11a">Attend</button>
+                </div>
+              </div>
+            </article>
+            <article class="gb-course">
+              <div class="gb-course-visual gb-visual-b" aria-hidden="true"><i class="bi bi-journal-richtext"></i></div>
+              <div class="gb-course-body">
+                <p class="gb-kicker">Period 5 · Room 118</p>
+                <h2>Literature 11B</h2>
+                <p>22 students · average 85% · quizzes posted</p>
+                <div class="gb-progress" aria-hidden="true"><span style="width:64%"></span></div>
+                <div class="gb-course-actions">
+                  <button type="button" class="gb-btn gb-btn-primary" data-view-jump="scores" data-section="lit11b">Scores</button>
+                  <button type="button" class="gb-btn gb-btn-ghost" data-view-jump="attendance" data-section="lit11b">Attend</button>
+                </div>
+              </div>
+            </article>
+            <article class="gb-course">
+              <div class="gb-course-visual gb-visual-c" aria-hidden="true"><i class="bi bi-people"></i></div>
+              <div class="gb-course-body">
+                <p class="gb-kicker">Period 1 · Room 118</p>
+                <h2>Homeroom 11</h2>
+                <p>16 students · attendance only · Priya Poluru copied</p>
+                <div class="gb-progress" aria-hidden="true"><span style="width:96%"></span></div>
+                <div class="gb-course-actions">
+                  <button type="button" class="gb-btn gb-btn-primary" data-view-jump="attendance" data-section="homeroom">Attend</button>
+                  <button type="button" class="gb-btn gb-btn-ghost" data-view-jump="reports" data-section="homeroom">Reports</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="gb-view" id="view-scores" hidden aria-labelledby="scores-title">
+          <div class="gb-page-head">
+            <div>
+              <p class="gb-kicker">Gradebook</p>
+              <h1 class="gb-page-title font-display" id="scores-title">Scores</h1>
+              <p class="gb-page-sub">Edit a cell and it toasts. Nothing leaves this browser. Weights: essays 40%, quizzes 30%, discussion 15%, midterm 15%.</p>
+            </div>
+            <button type="button" class="gb-btn gb-btn-ghost" id="gbExportBtn"><i class="bi bi-download"></i> Export</button>
+          </div>
+          <div class="gb-toolbar">
+            <p class="gb-result" id="gbScoreCount">6 students</p>
+          </div>
+          <div class="gb-card gb-card-flush">
+            <div class="gb-table-wrap">
+              <table class="gb-table">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Essay 1</th>
+                    <th>Quiz 3</th>
+                    <th>Talk</th>
+                    <th>Midterm</th>
+                    <th>Current</th>
+                  </tr>
+                </thead>
+                <tbody id="gbScoreBody">
+                  <tr data-section="lit11a">
+                    <td><strong>Leela Poluru</strong><span>#10842</span></td>
+                    <td><input class="gb-score" data-student="Leela Poluru" data-work="Essay 1" value="94" aria-label="Leela Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Leela Poluru" data-work="Quiz 3" value="90" aria-label="Leela Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Leela Poluru" data-work="Discussion" value="96" aria-label="Leela discussion" /></td>
+                    <td><input class="gb-score" data-student="Leela Poluru" data-work="Midterm" value="88" aria-label="Leela midterm" /></td>
+                    <td><span class="gb-mark">A-</span></td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Ishaan Poluru</strong><span>#12110</span></td>
+                    <td><input class="gb-score" data-student="Ishaan Poluru" data-work="Essay 1" value="86" aria-label="Ishaan Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Ishaan Poluru" data-work="Quiz 3" value="" placeholder="—" aria-label="Ishaan Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Ishaan Poluru" data-work="Discussion" value="91" aria-label="Ishaan discussion" /></td>
+                    <td><input class="gb-score" data-student="Ishaan Poluru" data-work="Midterm" value="84" aria-label="Ishaan midterm" /></td>
+                    <td><span class="gb-mark">B+</span></td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Tara Poluru</strong><span>#9821</span></td>
+                    <td><input class="gb-score" data-student="Tara Poluru" data-work="Essay 1" value="78" aria-label="Tara Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Tara Poluru" data-work="Quiz 3" value="82" aria-label="Tara Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Tara Poluru" data-work="Discussion" value="70" aria-label="Tara discussion" /></td>
+                    <td><input class="gb-score" data-student="Tara Poluru" data-work="Midterm" value="80" aria-label="Tara midterm" /></td>
+                    <td><span class="gb-mark">B-</span></td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Nila Poluru</strong><span>#9004</span></td>
+                    <td><input class="gb-score" data-student="Nila Poluru" data-work="Essay 1" value="97" aria-label="Nila Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Nila Poluru" data-work="Quiz 3" value="95" aria-label="Nila Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Nila Poluru" data-work="Discussion" value="98" aria-label="Nila discussion" /></td>
+                    <td><input class="gb-score" data-student="Nila Poluru" data-work="Midterm" value="93" aria-label="Nila midterm" /></td>
+                    <td><span class="gb-mark">A</span></td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Ravi Poluru</strong><span>#10770</span></td>
+                    <td><input class="gb-score" data-student="Ravi Poluru" data-work="Essay 1" value="88" aria-label="Ravi Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Ravi Poluru" data-work="Quiz 3" value="85" aria-label="Ravi Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Ravi Poluru" data-work="Discussion" value="90" aria-label="Ravi discussion" /></td>
+                    <td><input class="gb-score" data-student="Ravi Poluru" data-work="Midterm" value="87" aria-label="Ravi midterm" /></td>
+                    <td><span class="gb-mark">B+</span></td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Meera Poluru</strong><span>#11002</span></td>
+                    <td><input class="gb-score" data-student="Meera Poluru" data-work="Essay 1" value="91" aria-label="Meera Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Meera Poluru" data-work="Quiz 3" value="89" aria-label="Meera Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Meera Poluru" data-work="Discussion" value="93" aria-label="Meera discussion" /></td>
+                    <td><input class="gb-score" data-student="Meera Poluru" data-work="Midterm" value="90" aria-label="Meera midterm" /></td>
+                    <td><span class="gb-mark">A-</span></td>
+                  </tr>
+                  <tr data-section="lit11b">
+                    <td><strong>Asha Poluru</strong><span>#11208</span></td>
+                    <td><input class="gb-score" data-student="Asha Poluru" data-work="Essay 1" value="85" aria-label="Asha Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Asha Poluru" data-work="Quiz 3" value="88" aria-label="Asha Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Asha Poluru" data-work="Discussion" value="84" aria-label="Asha discussion" /></td>
+                    <td><input class="gb-score" data-student="Asha Poluru" data-work="Midterm" value="86" aria-label="Asha midterm" /></td>
+                    <td><span class="gb-mark">B+</span></td>
+                  </tr>
+                  <tr data-section="lit11b">
+                    <td><strong>Kiran Poluru</strong><span>#11330</span></td>
+                    <td><input class="gb-score" data-student="Kiran Poluru" data-work="Essay 1" value="92" aria-label="Kiran Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Kiran Poluru" data-work="Quiz 3" value="90" aria-label="Kiran Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Kiran Poluru" data-work="Discussion" value="94" aria-label="Kiran discussion" /></td>
+                    <td><input class="gb-score" data-student="Kiran Poluru" data-work="Midterm" value="91" aria-label="Kiran midterm" /></td>
+                    <td><span class="gb-mark">A-</span></td>
+                  </tr>
+                  <tr data-section="lit11b">
+                    <td><strong>Sia Poluru</strong><span>#11412</span></td>
+                    <td><input class="gb-score" data-student="Sia Poluru" data-work="Essay 1" value="80" aria-label="Sia Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Sia Poluru" data-work="Quiz 3" value="77" aria-label="Sia Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Sia Poluru" data-work="Discussion" value="83" aria-label="Sia discussion" /></td>
+                    <td><input class="gb-score" data-student="Sia Poluru" data-work="Midterm" value="79" aria-label="Sia midterm" /></td>
+                    <td><span class="gb-mark">B</span></td>
+                  </tr>
+                  <tr data-section="lit11b">
+                    <td><strong>Veer Poluru</strong><span>#11501</span></td>
+                    <td><input class="gb-score" data-student="Veer Poluru" data-work="Essay 1" value="89" aria-label="Veer Essay 1" /></td>
+                    <td><input class="gb-score" data-student="Veer Poluru" data-work="Quiz 3" value="91" aria-label="Veer Quiz 3" /></td>
+                    <td><input class="gb-score" data-student="Veer Poluru" data-work="Discussion" value="87" aria-label="Veer discussion" /></td>
+                    <td><input class="gb-score" data-student="Veer Poluru" data-work="Midterm" value="90" aria-label="Veer midterm" /></td>
+                    <td><span class="gb-mark">A-</span></td>
+                  </tr>
+                  <tr data-section="homeroom">
+                    <td><strong>Leela Poluru</strong><span>Homeroom</span></td>
+                    <td colspan="4"><span>Scores live in Literature 11A</span></td>
+                    <td><span class="gb-mark">—</span></td>
+                  </tr>
+                  <tr data-section="homeroom">
+                    <td><strong>Dev Poluru</strong><span>Homeroom</span></td>
+                    <td colspan="4"><span>Not on this English roster</span></td>
+                    <td><span class="gb-mark">—</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="gb-view" id="view-attendance" hidden aria-labelledby="attend-title">
+          <div class="gb-page-head">
+            <div>
+              <p class="gb-kicker">Today</p>
+              <h1 class="gb-page-title font-display" id="attend-title">Attendance</h1>
+              <p class="gb-page-sub">Mark present, tardy, or absent. Save posts a demo roster to Maya Poluru.</p>
+            </div>
+            <button type="button" class="gb-btn gb-btn-primary" id="gbSaveAttend">Save roster</button>
+          </div>
+          <div class="gb-card gb-card-flush">
+            <div class="gb-table-wrap">
+              <table class="gb-table">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Status</th>
+                    <th>Mark</th>
+                  </tr>
+                </thead>
+                <tbody id="gbAttendBody">
+                  <tr data-section="lit11a">
+                    <td><strong>Leela Poluru</strong><span>#10842</span></td>
+                    <td><span class="gb-status is-present">Present</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Leela Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Leela Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Leela Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Ishaan Poluru</strong><span>#12110</span></td>
+                    <td><span class="gb-status is-present">Present</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Ishaan Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Ishaan Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Ishaan Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Tara Poluru</strong><span>#9821</span></td>
+                    <td><span class="gb-status is-tardy">Tardy</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Tara Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Tara Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Tara Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="lit11a">
+                    <td><strong>Nila Poluru</strong><span>#9004</span></td>
+                    <td><span class="gb-status is-present">Present</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Nila Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Nila Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Nila Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="lit11b">
+                    <td><strong>Asha Poluru</strong><span>#11208</span></td>
+                    <td><span class="gb-status is-present">Present</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Asha Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Asha Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Asha Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="lit11b">
+                    <td><strong>Kiran Poluru</strong><span>#11330</span></td>
+                    <td><span class="gb-status is-present">Present</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Kiran Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Kiran Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Kiran Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="homeroom">
+                    <td><strong>Dev Poluru</strong><span>#10418</span></td>
+                    <td><span class="gb-status is-absent">Absent</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Dev Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Dev Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Dev Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr data-section="homeroom">
+                    <td><strong>Leela Poluru</strong><span>#10842</span></td>
+                    <td><span class="gb-status is-present">Present</span></td>
+                    <td>
+                      <div class="gb-attend-btns">
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="present" data-student="Leela Poluru">P</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="tardy" data-student="Leela Poluru">T</button>
+                        <button type="button" class="gb-btn gb-btn-ghost gb-btn-sm" data-attend="absent" data-student="Leela Poluru">A</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="gb-view" id="view-reports" hidden aria-labelledby="reports-title">
+          <div class="gb-page-head">
+            <div>
+              <p class="gb-kicker">Fall comments</p>
+              <h1 class="gb-page-title font-display" id="reports-title">Report cards</h1>
+              <p class="gb-page-sub">Drafts for the current section. Publish queues Maya Poluru at the registrar desk.</p>
+            </div>
+          </div>
+          <div class="grid gap-4 lg:grid-cols-2">
+            <article class="gb-card gb-report" data-section-row="lit11a">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Leela Poluru · A-</h2>
+                <span class="gb-mark">11A</span>
+              </div>
+              <label class="sr-only" for="rep-leela">Comment for Leela Poluru</label>
+              <textarea id="rep-leela">Leela Poluru writes with a clean line. Essay 2 still needs one claim, not three. Attendance is excellent.</textarea>
+              <button type="button" class="gb-btn gb-btn-primary" data-publish="Leela Poluru">Publish</button>
+            </article>
+            <article class="gb-card gb-report" data-section-row="lit11a">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Nila Poluru · A</h2>
+                <span class="gb-mark">11A</span>
+              </div>
+              <label class="sr-only" for="rep-nila">Comment for Nila Poluru</label>
+              <textarea id="rep-nila">Nila Poluru sets the bar for discussion. The midterm was precise. Keep pushing her to disagree on the page, not only in class.</textarea>
+              <button type="button" class="gb-btn gb-btn-primary" data-publish="Nila Poluru">Publish</button>
+            </article>
+            <article class="gb-card gb-report" data-section-row="lit11a">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Tara Poluru · B-</h2>
+                <span class="gb-mark">11A</span>
+              </div>
+              <label class="sr-only" for="rep-tara">Comment for Tara Poluru</label>
+              <textarea id="rep-tara">Tara Poluru has the ideas. Tardies and missing talk points are holding the mark. Priya Poluru and I will sit with her on Thursday.</textarea>
+              <button type="button" class="gb-btn gb-btn-primary" data-publish="Tara Poluru">Publish</button>
+            </article>
+            <article class="gb-card gb-report" data-section-row="lit11b">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Kiran Poluru · A-</h2>
+                <span class="gb-mark">11B</span>
+              </div>
+              <label class="sr-only" for="rep-kiran">Comment for Kiran Poluru</label>
+              <textarea id="rep-kiran">Kiran Poluru’s essays arrive on time and actually argue. Next term: slower close reading, fewer summaries.</textarea>
+              <button type="button" class="gb-btn gb-btn-primary" data-publish="Kiran Poluru">Publish</button>
+            </article>
+            <article class="gb-card gb-report" data-section-row="lit11b">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Sia Poluru · B</h2>
+                <span class="gb-mark">11B</span>
+              </div>
+              <label class="sr-only" for="rep-sia">Comment for Sia Poluru</label>
+              <textarea id="rep-sia">Sia Poluru is close. Quiz 3 showed the gap in evidence. Office hour with me after period 5.</textarea>
+              <button type="button" class="gb-btn gb-btn-primary" data-publish="Sia Poluru">Publish</button>
+            </article>
+            <article class="gb-card gb-report" data-section-row="homeroom">
+              <div class="gb-card-head">
+                <h2 class="gb-card-title">Dev Poluru · Homeroom</h2>
+                <span class="gb-mark">HR</span>
+              </div>
+              <label class="sr-only" for="rep-dev">Comment for Dev Poluru</label>
+              <textarea id="rep-dev">Dev Poluru is a solid presence when he is here. Today’s absence is excused with Maya Poluru. No academic comment from this homeroom.</textarea>
+              <button type="button" class="gb-btn gb-btn-primary" data-publish="Dev Poluru">Publish</button>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="gb-toast" id="gbToast" role="status" aria-live="polite">
+    <i class="bi bi-check-circle-fill"></i>
+    <div>
+      <strong id="gbToastTitle">Done</strong>
+      <p id="gbToastBody">Action completed.</p>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
 </html>
