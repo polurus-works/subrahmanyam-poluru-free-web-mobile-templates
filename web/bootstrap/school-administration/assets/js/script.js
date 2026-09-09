@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Ashbury — School administration dashboard
  */
@@ -163,3 +164,6 @@
     docsSections.forEach((section) => observer.observe(section));
   }
 })();
+=======
+console.log("Hello, World!");
+>>>>>>> ae95d6daa6479a622c1f245ca284ab3feb7027ca
