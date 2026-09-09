@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+  Ashbury — School administration dashboard
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Class schedule for Ashbury Academy." />
+  <title>Classes — Ashbury Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="sa-body">
+  <a class="sa-skip-link" href="#main-content">Skip to content</a>
+  <div class="sa-overlay" id="saOverlay" aria-hidden="true"></div>
+  <div class="sa-shell">
+    <aside class="sa-sidebar" id="saSidebar" aria-label="Primary">
+      <div class="sa-brand">
+        <a class="sa-brand-link" href="index.html">
+          <span class="sa-brand-mark" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></span>
+          <span>Ashbury<em>.</em></span>
+        </a>
+        <button type="button" class="sa-sidebar-close d-lg-none" id="saSidebarClose" aria-label="Close navigation"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <nav class="sa-nav">
+        <p class="sa-nav-label">School</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="index.html"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+          <li><a class="sa-nav-link" href="students.html"><i class="bi bi-people"></i><span>Students</span></a></li>
+          <li><a class="sa-nav-link" href="teachers.html"><i class="bi bi-person-badge"></i><span>Teachers</span></a></li>
+          <li><a class="sa-nav-link active" href="classes.html" aria-current="page"><i class="bi bi-journal-bookmark"></i><span>Classes</span></a></li>
+          <li><a class="sa-nav-link" href="attendance.html"><i class="bi bi-clipboard-check"></i><span>Attendance</span><span class="sa-nav-badge">6</span></a></li>
+          <li><a class="sa-nav-link" href="reports.html"><i class="bi bi-graph-up"></i><span>Reports</span></a></li>
+        </ul>
+        <p class="sa-nav-label">Template</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="about.html"><i class="bi bi-info-circle"></i><span>About</span></a></li>
+          <li><a class="sa-nav-link" href="documentation.html"><i class="bi bi-journal-text"></i><span>Docs</span></a></li>
+          <li><a class="sa-nav-link" href="contact.html"><i class="bi bi-headset"></i><span>Contact</span></a></li>
+        </ul>
+      </nav>
+      <div class="sa-sidebar-foot"><div class="sa-staff"><span class="sa-avatar">SP</span><p><strong>Subbu Poluru</strong>Principal · Ashbury</p></div></div>
+    </aside>
+    <div class="sa-main">
+      <header class="sa-topbar">
+        <button type="button" class="sa-menu-btn" id="saMenuBtn" aria-label="Open navigation"><i class="bi bi-list fs-5"></i></button>
+        <p class="sa-crumb mb-0">School / <strong>Classes</strong></p>
+        <div class="sa-periods" aria-label="Bell schedule">
+          <span class="sa-period">P1</span><span class="sa-period">P2</span><span class="sa-period is-now">P3</span><span class="sa-period">P4</span><span class="sa-period">P5</span><span class="sa-period">P6</span><span class="sa-period">P7</span>
+        </div>
+        <div class="sa-search"><i class="bi bi-search"></i><input id="saTopSearch" type="search" placeholder="Search students, classes…" aria-label="Search the school dashboard" /></div>
+        <button type="button" class="sa-icon-btn" aria-label="Notifications, 3 unread"><i class="bi bi-bell"></i><span class="sa-dot"></span></button>
+        <span class="sa-avatar">SP</span>
+      </header>
+      <main id="main-content" class="sa-content">
+        <div class="sa-page-head">
+          <div>
+            <p class="sa-kicker">Schedule</p>
+            <h1>Classes</h1>
+            <p class="sa-lede">Today’s board. Open a roster or start attendance for the period in session.</p>
+          </div>
+        </div>
+        <div class="sa-toolbar">
+          <div class="sa-search-wrap">
+            <i class="bi bi-search"></i>
+            <input class="form-control" id="saClassSearch" type="search" placeholder="Search class or teacher…" aria-label="Search classes" />
+          </div>
+          <label class="sa-field">Subject
+            <select class="form-select" id="saClassSubject">
+              <option value="all">All subjects</option>
+              <option value="math">Math</option>
+              <option value="english">English</option>
+              <option value="science">Science</option>
+              <option value="history">History</option>
+              <option value="pe">PE</option>
+            </select>
+          </label>
+          <label class="sa-field">Period
+            <select class="form-select" id="saClassPeriod">
+              <option value="all">All periods</option>
+              <option value="1">Period 1</option>
+              <option value="2">Period 2</option>
+              <option value="3">Period 3</option>
+              <option value="4">Period 4</option>
+            </select>
+          </label>
+        </div>
+        <p class="sa-empty" id="saClassEmpty">No classes match those filters.</p>
+        <section class="sa-card">
+          <div class="table-responsive">
+            <table class="table sa-table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Class</th>
+                  <th>Teacher</th>
+                  <th>Room</th>
+                  <th>Seats</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-class-row data-grade="math" data-subject="math" data-status="3">
+                  <td class="sa-class-time">P3</td>
+                  <td>Algebra II</td>
+                  <td>Arjun Poluru</td>
+                  <td>204</td>
+                  <td>23/25</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="Algebra II">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="Algebra II">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="english" data-status="3">
+                  <td class="sa-class-time">P3</td>
+                  <td>English Literature</td>
+                  <td>Kavya Poluru</td>
+                  <td>118</td>
+                  <td>22/25</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="English Literature">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="English Literature">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="science" data-status="3">
+                  <td class="sa-class-time">P3</td>
+                  <td>Chemistry</td>
+                  <td>Anika Poluru</td>
+                  <td>Lab B</td>
+                  <td>16/20</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="Chemistry">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="Chemistry">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="pe" data-status="3">
+                  <td class="sa-class-time">P3</td>
+                  <td>Physical Education</td>
+                  <td>Nikhil Poluru</td>
+                  <td>Gym</td>
+                  <td>28/30</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="Physical Education">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="Physical Education">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="history" data-status="3">
+                  <td class="sa-class-time">P3</td>
+                  <td>World History</td>
+                  <td>Rohan Poluru</td>
+                  <td>312</td>
+                  <td>19/25</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="World History">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="World History">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="math" data-status="1">
+                  <td class="sa-class-time">P1</td>
+                  <td>Geometry</td>
+                  <td>Arjun Poluru</td>
+                  <td>204</td>
+                  <td>24/25</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="Geometry">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="Geometry">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="english" data-status="2">
+                  <td class="sa-class-time">P2</td>
+                  <td>Composition</td>
+                  <td>Kavya Poluru</td>
+                  <td>118</td>
+                  <td>21/25</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="Composition">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="Composition">Attend</button>
+                  </td>
+                </tr>
+                <tr data-class-row data-subject="science" data-status="4">
+                  <td class="sa-class-time">P4</td>
+                  <td>Biology</td>
+                  <td>Anika Poluru</td>
+                  <td>Lab A</td>
+                  <td>18/20</td>
+                  <td class="text-end">
+                    <button type="button" class="btn sa-btn-ghost btn-sm" data-class-action="roster" data-class-name="Biology">Roster</button>
+                    <button type="button" class="btn sa-btn-primary btn-sm" data-class-action="attend" data-class-name="Biology">Attend</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+      <p class="sa-footer px-4">&copy; 2026 Subrahmanyam Poluru · Ashbury school administration</p>
+    </div>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="saToast" class="toast sa-toast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header"><strong class="me-auto">Ashbury</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div>
+      <div class="toast-body" id="saToastBody">Done.</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

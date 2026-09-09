@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!--
+  Ashbury — School administration dashboard
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Student directory for Ashbury Academy." />
+  <title>Students — Ashbury Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="sa-body">
+  <a class="sa-skip-link" href="#main-content">Skip to content</a>
+  <div class="sa-overlay" id="saOverlay" aria-hidden="true"></div>
+  <div class="sa-shell">
+    <aside class="sa-sidebar" id="saSidebar" aria-label="Primary">
+      <div class="sa-brand">
+        <a class="sa-brand-link" href="index.html">
+          <span class="sa-brand-mark" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></span>
+          <span>Ashbury<em>.</em></span>
+        </a>
+        <button type="button" class="sa-sidebar-close d-lg-none" id="saSidebarClose" aria-label="Close navigation"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <nav class="sa-nav">
+        <p class="sa-nav-label">School</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="index.html"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+          <li><a class="sa-nav-link active" href="students.html" aria-current="page"><i class="bi bi-people"></i><span>Students</span></a></li>
+          <li><a class="sa-nav-link" href="teachers.html"><i class="bi bi-person-badge"></i><span>Teachers</span></a></li>
+          <li><a class="sa-nav-link" href="classes.html"><i class="bi bi-journal-bookmark"></i><span>Classes</span></a></li>
+          <li><a class="sa-nav-link" href="attendance.html"><i class="bi bi-clipboard-check"></i><span>Attendance</span><span class="sa-nav-badge">6</span></a></li>
+          <li><a class="sa-nav-link" href="reports.html"><i class="bi bi-graph-up"></i><span>Reports</span></a></li>
+        </ul>
+        <p class="sa-nav-label">Template</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="about.html"><i class="bi bi-info-circle"></i><span>About</span></a></li>
+          <li><a class="sa-nav-link" href="documentation.html"><i class="bi bi-journal-text"></i><span>Docs</span></a></li>
+          <li><a class="sa-nav-link" href="contact.html"><i class="bi bi-headset"></i><span>Contact</span></a></li>
+        </ul>
+      </nav>
+      <div class="sa-sidebar-foot"><div class="sa-staff"><span class="sa-avatar">SP</span><p><strong>Subbu Poluru</strong>Principal · Ashbury</p></div></div>
+    </aside>
+    <div class="sa-main">
+      <header class="sa-topbar">
+        <button type="button" class="sa-menu-btn" id="saMenuBtn" aria-label="Open navigation"><i class="bi bi-list fs-5"></i></button>
+        <p class="sa-crumb mb-0">School / <strong>Students</strong></p>
+        <div class="sa-periods" aria-label="Bell schedule">
+          <span class="sa-period">P1</span><span class="sa-period">P2</span><span class="sa-period is-now">P3</span><span class="sa-period">P4</span><span class="sa-period">P5</span><span class="sa-period">P6</span><span class="sa-period">P7</span>
+        </div>
+        <div class="sa-search"><i class="bi bi-search"></i><input id="saTopSearch" type="search" placeholder="Search students, classes…" aria-label="Search the school dashboard" /></div>
+        <button type="button" class="sa-icon-btn" aria-label="Notifications, 3 unread"><i class="bi bi-bell"></i><span class="sa-dot"></span></button>
+        <span class="sa-avatar">SP</span>
+      </header>
+      <main id="main-content" class="sa-content">
+        <div class="sa-page-head">
+          <div>
+            <p class="sa-kicker">Directory</p>
+            <h1>Students</h1>
+            <p class="sa-lede">Filter by grade and status. Open a homeroom or add a counselor note from the card.</p>
+          </div>
+          <a class="btn sa-btn-primary" href="attendance.html"><i class="bi bi-clipboard-check me-1"></i>Take attendance</a>
+        </div>
+        <div class="sa-toolbar">
+          <div class="sa-search-wrap">
+            <i class="bi bi-search"></i>
+            <input class="form-control" id="saStudentSearch" type="search" placeholder="Search name or ID…" aria-label="Search students" />
+          </div>
+          <label class="sa-field">Grade
+            <select class="form-select" id="saStudentGrade">
+              <option value="all">All grades</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+          </label>
+          <label class="sa-field">Status
+            <select class="form-select" id="saStudentStatus">
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="absent">Absent</option>
+              <option value="watch">Watch</option>
+            </select>
+          </label>
+        </div>
+        <p class="sa-empty" id="saStudentEmpty">No students match those filters.</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="10" data-status="active">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg">LP</span>
+                <div><strong>Leela Poluru</strong><span>#10842 · Grade 10</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Arjun</li><li class="sa-badge sa-badge-ok">Active</li></ul>
+              <p class="small text-muted mb-0">Attendance 98% · Advisor Maya Poluru</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Leela Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Leela Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="8" data-status="absent">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg sa-avatar-ember">DP</span>
+                <div><strong>Dev Poluru</strong><span>#10418 · Grade 8</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Arjun</li><li class="sa-badge sa-badge-warn">Absent</li></ul>
+              <p class="small text-muted mb-0">Illness today · Advisor Priya Poluru</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Dev Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Dev Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="11" data-status="active">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg sa-avatar-ink">IP</span>
+                <div><strong>Ishaan Poluru</strong><span>#12110 · Grade 11</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Anika</li><li class="sa-badge sa-badge-ok">Active</li></ul>
+              <p class="small text-muted mb-0">Attendance 94% · varsity travel excused</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Ishaan Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Ishaan Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="9" data-status="watch">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg sa-avatar-ember">MP</span>
+                <div><strong>Meera Poluru</strong><span>#11002 · Grade 9</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Kavya</li><li class="sa-badge sa-badge-warn">Watch</li></ul>
+              <p class="small text-muted mb-0">Early out appointment · 91% attendance</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Meera Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Meera Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="11" data-status="watch">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg">TP</span>
+                <div><strong>Tara Poluru</strong><span>#9821 · Grade 11</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Rohan</li><li class="sa-badge">Tardy</li></ul>
+              <p class="small text-muted mb-0">Unexcused tardy period 1 · counselor Priya</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Tara Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Tara Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="12" data-status="active">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg sa-avatar-ink">NP</span>
+                <div><strong>Nila Poluru</strong><span>#9004 · Grade 12</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Kavya</li><li class="sa-badge sa-badge-ok">Active</li></ul>
+              <p class="small text-muted mb-0">Attendance 99% · college counselor Priya</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Nila Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Nila Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="10" data-status="active">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg">RP</span>
+                <div><strong>Ravi Poluru</strong><span>#10770 · Grade 10</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Anika</li><li class="sa-badge sa-badge-ok">Active</li></ul>
+              <p class="small text-muted mb-0">Attendance 97% · chemistry lab aide</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Ravi Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Ravi Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-4" data-student-card data-grade="9" data-status="active">
+            <article class="sa-card sa-card-pad sa-profile">
+              <div class="sa-person">
+                <span class="sa-avatar sa-avatar-lg sa-avatar-ember">AP</span>
+                <div><strong>Asha Poluru</strong><span>#11208 · Grade 9</span></div>
+              </div>
+              <ul class="sa-tags"><li class="sa-badge">Homeroom · Nikhil</li><li class="sa-badge sa-badge-ok">Active</li></ul>
+              <p class="small text-muted mb-0">Attendance 96% · PE student aide</p>
+              <div class="d-flex gap-2">
+                <button type="button" class="btn sa-btn-primary btn-sm" data-student-action="open" data-student-name="Asha Poluru">Homeroom</button>
+                <button type="button" class="btn sa-btn-ghost btn-sm" data-student-action="note" data-student-name="Asha Poluru">Note</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
+      <p class="sa-footer px-4">&copy; 2026 Subrahmanyam Poluru · Ashbury school administration</p>
+    </div>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="saToast" class="toast sa-toast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header"><strong class="me-auto">Ashbury</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div>
+      <div class="toast-body" id="saToastBody">Done.</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

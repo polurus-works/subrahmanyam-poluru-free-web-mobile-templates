@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--
+  Ashbury — School administration dashboard
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Ashbury Academy school administration dashboard for students, teachers, classes, attendance, and reports." />
+  <title>Dashboard — Ashbury Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="sa-body">
+  <a class="sa-skip-link" href="#main-content">Skip to content</a>
+  <div class="sa-overlay" id="saOverlay" aria-hidden="true"></div>
+
+  <div class="sa-shell">
+    <aside class="sa-sidebar" id="saSidebar" aria-label="Primary">
+      <div class="sa-brand">
+        <a class="sa-brand-link" href="index.html">
+          <span class="sa-brand-mark" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></span>
+          <span>Ashbury<em>.</em></span>
+        </a>
+        <button type="button" class="sa-sidebar-close d-lg-none" id="saSidebarClose" aria-label="Close navigation">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <nav class="sa-nav">
+        <p class="sa-nav-label">School</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link active" href="index.html" aria-current="page"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+          <li><a class="sa-nav-link" href="students.html"><i class="bi bi-people"></i><span>Students</span></a></li>
+          <li><a class="sa-nav-link" href="teachers.html"><i class="bi bi-person-badge"></i><span>Teachers</span></a></li>
+          <li><a class="sa-nav-link" href="classes.html"><i class="bi bi-journal-bookmark"></i><span>Classes</span></a></li>
+          <li><a class="sa-nav-link" href="attendance.html"><i class="bi bi-clipboard-check"></i><span>Attendance</span><span class="sa-nav-badge">6</span></a></li>
+          <li><a class="sa-nav-link" href="reports.html"><i class="bi bi-graph-up"></i><span>Reports</span></a></li>
+        </ul>
+        <p class="sa-nav-label">Template</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="about.html"><i class="bi bi-info-circle"></i><span>About</span></a></li>
+          <li><a class="sa-nav-link" href="documentation.html"><i class="bi bi-journal-text"></i><span>Docs</span></a></li>
+          <li><a class="sa-nav-link" href="contact.html"><i class="bi bi-headset"></i><span>Contact</span></a></li>
+        </ul>
+      </nav>
+      <div class="sa-sidebar-foot">
+        <div class="sa-staff">
+          <span class="sa-avatar">SP</span>
+          <p><strong>Subbu Poluru</strong>Principal · Ashbury</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sa-main">
+      <header class="sa-topbar">
+        <button type="button" class="sa-menu-btn" id="saMenuBtn" aria-label="Open navigation" aria-controls="saSidebar">
+          <i class="bi bi-list fs-5"></i>
+        </button>
+        <p class="sa-crumb mb-0">School / <strong>Dashboard</strong></p>
+        <div class="sa-periods" aria-label="Bell schedule">
+          <span class="sa-period">P1</span>
+          <span class="sa-period">P2</span>
+          <span class="sa-period is-now" title="Period 3 · Algebra II">P3</span>
+          <span class="sa-period">P4</span>
+          <span class="sa-period">P5</span>
+          <span class="sa-period">P6</span>
+          <span class="sa-period">P7</span>
+        </div>
+        <div class="sa-search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <input id="saTopSearch" type="search" placeholder="Search students, classes…" aria-label="Search the school dashboard" />
+        </div>
+        <button type="button" class="sa-icon-btn" aria-label="Notifications, 3 unread">
+          <i class="bi bi-bell"></i>
+          <span class="sa-dot"></span>
+        </button>
+        <span class="sa-avatar" aria-hidden="true">SP</span>
+      </header>
+
+      <main id="main-content" class="sa-content">
+        <div class="sa-page-head">
+          <div>
+            <p class="sa-kicker" id="saClock">Tuesday, September 8</p>
+            <h1>Good morning, Subbu</h1>
+            <p class="sa-lede">Ashbury Academy snapshot — enrollment, period 3, attendance, and the six students still unsigned.</p>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn sa-btn-ghost" href="attendance.html"><i class="bi bi-clipboard-check me-1"></i>Take attendance</a>
+            <a class="btn sa-btn-primary" href="students.html"><i class="bi bi-person-plus me-1"></i>Add student</a>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-xl-3">
+            <article class="sa-card sa-stat">
+              <span class="sa-stat-icon"><i class="bi bi-people"></i></span>
+              <span>Enrolled students</span>
+              <strong>842</strong>
+              <small>+12 this term</small>
+            </article>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <article class="sa-card sa-stat">
+              <span class="sa-stat-icon"><i class="bi bi-person-badge"></i></span>
+              <span>Teachers</span>
+              <strong>48</strong>
+              <small>6 on duty now</small>
+            </article>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <article class="sa-card sa-stat">
+              <span class="sa-stat-icon"><i class="bi bi-clipboard-check"></i></span>
+              <span>Attendance today</span>
+              <strong>96.4%</strong>
+              <small>6 unmarked rosters</small>
+            </article>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <article class="sa-card sa-stat">
+              <span class="sa-stat-icon"><i class="bi bi-journal-bookmark"></i></span>
+              <span>Active classes</span>
+              <strong>126</strong>
+              <small>Period 3 in session</small>
+            </article>
+          </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+          <div class="col-xl-8">
+            <section class="sa-card">
+              <div class="sa-card-head">
+                <h2>Period 3 · now</h2>
+                <a href="classes.html" class="fw-semibold">Full schedule</a>
+              </div>
+              <div class="table-responsive">
+                <table class="table sa-table">
+                  <thead>
+                    <tr>
+                      <th>Room</th>
+                      <th>Class</th>
+                      <th>Teacher</th>
+                      <th>Grade</th>
+                      <th>Seats</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="sa-class-time">204</td>
+                      <td>Algebra II</td>
+                      <td>Arjun Poluru</td>
+                      <td>10</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="sa-bar flex-grow-1"><span style="width:92%"></span></div>
+                          <span class="small">23/25</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sa-class-time">118</td>
+                      <td>English Literature</td>
+                      <td>Kavya Poluru</td>
+                      <td>11</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="sa-bar flex-grow-1"><span style="width:88%"></span></div>
+                          <span class="small">22/25</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sa-class-time">Lab B</td>
+                      <td>Chemistry</td>
+                      <td>Anika Poluru</td>
+                      <td>10</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="sa-bar flex-grow-1"><span style="width:80%"></span></div>
+                          <span class="small">16/20</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sa-class-time">Gym</td>
+                      <td>Physical Education</td>
+                      <td>Nikhil Poluru</td>
+                      <td>9</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="sa-bar flex-grow-1"><span style="width:96%"></span></div>
+                          <span class="small">28/30</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="sa-class-time">312</td>
+                      <td>World History</td>
+                      <td>Rohan Poluru</td>
+                      <td>9</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="sa-bar flex-grow-1"><span style="width:76%"></span></div>
+                          <span class="small">19/25</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <div class="col-xl-4">
+            <section class="sa-card sa-card-pad mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h6 mb-0">Attendance by grade</h2>
+                <span class="sa-live">Today</span>
+              </div>
+              <div class="sa-zone mb-3">
+                <div class="sa-zone-row"><span>Grade 9</span><span>97%</span></div>
+                <div class="sa-bar"><span style="width:97%"></span></div>
+              </div>
+              <div class="sa-zone mb-3">
+                <div class="sa-zone-row"><span>Grade 10</span><span>96%</span></div>
+                <div class="sa-bar"><span style="width:96%"></span></div>
+              </div>
+              <div class="sa-zone mb-3">
+                <div class="sa-zone-row"><span>Grade 11</span><span>95%</span></div>
+                <div class="sa-bar"><span style="width:95%"></span></div>
+              </div>
+              <div class="sa-zone">
+                <div class="sa-zone-row"><span>Grade 12</span><span>94%</span></div>
+                <div class="sa-bar"><span style="width:94%"></span></div>
+              </div>
+            </section>
+            <section class="sa-card sa-card-pad">
+              <h2 class="h6 mb-3">Front office</h2>
+              <div class="sa-alert">
+                <span class="sa-alert-icon"><i class="bi bi-exclamation-triangle"></i></span>
+                <div>
+                  <strong class="d-block">6 unmarked rosters</strong>
+                  <span class="text-muted small">Period 2 still open. Maya Poluru will ping homerooms.</span>
+                </div>
+              </div>
+              <div class="sa-alert">
+                <span class="sa-alert-icon"><i class="bi bi-heart-pulse"></i></span>
+                <div>
+                  <strong class="d-block">Leela Poluru in nurse office</strong>
+                  <span class="text-muted small">Checked in 9:12 AM · Grade 10.</span>
+                </div>
+              </div>
+              <div class="sa-alert">
+                <span class="sa-alert-icon"><i class="bi bi-calendar-event"></i></span>
+                <div>
+                  <strong class="d-block">Parent night Thursday</strong>
+                  <span class="text-muted small">Priya Poluru owns the counselor table.</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <section class="sa-card">
+          <div class="sa-card-head">
+            <h2>Today’s absences</h2>
+            <a href="attendance.html" class="fw-semibold">Attendance desk</a>
+          </div>
+          <div class="table-responsive">
+            <table class="table sa-table">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Grade</th>
+                  <th>Homeroom</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="sa-person">
+                      <span class="sa-avatar">DP</span>
+                      <div><strong>Dev Poluru</strong><span>#10418</span></div>
+                    </div>
+                  </td>
+                  <td>8</td>
+                  <td>Arjun Poluru</td>
+                  <td>Illness</td>
+                  <td><span class="sa-badge sa-badge-warn">Absent</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="sa-person">
+                      <span class="sa-avatar sa-avatar-ember">MP</span>
+                      <div><strong>Meera Poluru</strong><span>#11002</span></div>
+                    </div>
+                  </td>
+                  <td>9</td>
+                  <td>Kavya Poluru</td>
+                  <td>Appointment</td>
+                  <td><span class="sa-badge sa-badge-warn">Early out</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="sa-person">
+                      <span class="sa-avatar sa-avatar-ink">TP</span>
+                      <div><strong>Tara Poluru</strong><span>#9821</span></div>
+                    </div>
+                  </td>
+                  <td>11</td>
+                  <td>Rohan Poluru</td>
+                  <td>Unexcused</td>
+                  <td><span class="sa-badge">Tardy</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="sa-person">
+                      <span class="sa-avatar">IP</span>
+                      <div><strong>Ishaan Poluru</strong><span>#12110</span></div>
+                    </div>
+                  </td>
+                  <td>11</td>
+                  <td>Anika Poluru</td>
+                  <td>Sports travel</td>
+                  <td><span class="sa-badge sa-badge-ok">Excused</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <p class="sa-footer px-4">&copy; 2026 Subrahmanyam Poluru · Ashbury school administration · Free for personal &amp; commercial use</p>
+    </div>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="saToast" class="toast sa-toast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Ashbury</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="saToastBody">Done.</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
