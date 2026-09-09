@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+  Ashbury — School administration dashboard
+  Author: Subrahmanyam Poluru
+  Website: https://polurus.com
+  License: Free for Personal and Commercial Use
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Subrahmanyam Poluru" />
+  <meta name="description" content="Documentation for the Ashbury school administration dashboard." />
+  <title>Docs — Ashbury Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body class="sa-body">
+  <a class="sa-skip-link" href="#main-content">Skip to content</a>
+  <div class="sa-overlay" id="saOverlay" aria-hidden="true"></div>
+  <div class="sa-shell">
+    <aside class="sa-sidebar" id="saSidebar" aria-label="Primary">
+      <div class="sa-brand">
+        <a class="sa-brand-link" href="index.html">
+          <span class="sa-brand-mark" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></span>
+          <span>Ashbury<em>.</em></span>
+        </a>
+        <button type="button" class="sa-sidebar-close d-lg-none" id="saSidebarClose" aria-label="Close navigation"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <nav class="sa-nav">
+        <p class="sa-nav-label">School</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="index.html"><i class="bi bi-grid-1x2"></i><span>Dashboard</span></a></li>
+          <li><a class="sa-nav-link" href="students.html"><i class="bi bi-people"></i><span>Students</span></a></li>
+          <li><a class="sa-nav-link" href="teachers.html"><i class="bi bi-person-badge"></i><span>Teachers</span></a></li>
+          <li><a class="sa-nav-link" href="classes.html"><i class="bi bi-journal-bookmark"></i><span>Classes</span></a></li>
+          <li><a class="sa-nav-link" href="attendance.html"><i class="bi bi-clipboard-check"></i><span>Attendance</span><span class="sa-nav-badge">6</span></a></li>
+          <li><a class="sa-nav-link" href="reports.html"><i class="bi bi-graph-up"></i><span>Reports</span></a></li>
+        </ul>
+        <p class="sa-nav-label">Template</p>
+        <ul class="sa-nav-list">
+          <li><a class="sa-nav-link" href="about.html"><i class="bi bi-info-circle"></i><span>About</span></a></li>
+          <li><a class="sa-nav-link active" href="documentation.html" aria-current="page"><i class="bi bi-journal-text"></i><span>Docs</span></a></li>
+          <li><a class="sa-nav-link" href="contact.html"><i class="bi bi-headset"></i><span>Contact</span></a></li>
+        </ul>
+      </nav>
+      <div class="sa-sidebar-foot"><div class="sa-staff"><span class="sa-avatar">SP</span><p><strong>Subbu Poluru</strong>Principal · Ashbury</p></div></div>
+    </aside>
+    <div class="sa-main">
+      <header class="sa-topbar">
+        <button type="button" class="sa-menu-btn" id="saMenuBtn" aria-label="Open navigation"><i class="bi bi-list fs-5"></i></button>
+        <p class="sa-crumb mb-0">Template / <strong>Docs</strong></p>
+        <div class="sa-search"><i class="bi bi-search"></i><input id="saTopSearch" type="search" placeholder="Search students, classes…" aria-label="Search the school dashboard" /></div>
+        <button type="button" class="sa-icon-btn" aria-label="Notifications, 3 unread"><i class="bi bi-bell"></i><span class="sa-dot"></span></button>
+        <span class="sa-avatar">SP</span>
+      </header>
+      <main id="main-content" class="sa-content">
+        <div class="sa-page-head">
+          <div>
+            <p class="sa-kicker">Guide</p>
+            <h1>Documentation</h1>
+            <p class="sa-lede">Pages, class prefix, and how the demo interactions work.</p>
+          </div>
+        </div>
+        <div class="sa-docs">
+          <nav class="sa-docs-nav" aria-label="On this page">
+            <p class="sa-kicker">On this page</p>
+            <ul>
+              <li><a href="#pages">Pages</a></li>
+              <li><a href="#prefix">CSS prefix</a></li>
+              <li><a href="#filters">Filters</a></li>
+              <li><a href="#run">Run locally</a></li>
+            </ul>
+          </nav>
+          <div class="sa-docs-content">
+            <section id="pages">
+              <h2 class="h5">Pages</h2>
+              <p>Dashboard, Students, Teachers, Classes, Attendance, Reports, plus About, Docs, and Contact.</p>
+            </section>
+            <section id="prefix">
+              <h2 class="h5">CSS prefix</h2>
+              <p>Custom classes use <code>sa-</code>. Brand color is <code>#FB6C00</code>.</p>
+              <code class="sa-code">.sa-sidebar, .sa-card, .sa-btn-primary</code>
+            </section>
+            <section id="filters">
+              <h2 class="h5">Filters</h2>
+              <p>Directory pages filter on <code>data-grade</code> / <code>data-subject</code> and <code>data-status</code>. Keep those attributes aligned with the select values.</p>
+            </section>
+            <section id="run">
+              <h2 class="h5">Run locally</h2>
+              <code class="sa-code">cd web/bootstrap/school-administration
+python3 -m http.server 8000</code>
+            </section>
+          </div>
+        </div>
+      </main>
+      <p class="sa-footer px-4">&copy; 2026 Subrahmanyam Poluru · Ashbury school administration</p>
+    </div>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="saToast" class="toast sa-toast" role="status" aria-live="polite" aria-atomic="true">
+      <div class="toast-header"><strong class="me-auto">Ashbury</strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div>
+      <div class="toast-body" id="saToastBody">Done.</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
